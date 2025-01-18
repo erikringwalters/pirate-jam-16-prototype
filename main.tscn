@@ -1,8 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct0tti2mfck6l"]
+[gd_scene load_steps=8 format=3 uid="uid://ct0tti2mfck6l"]
 
 [ext_resource type="PackedScene" uid="uid://bwge4babpy161" path="res://scenes/player.tscn" id="1_0xm2m"]
 [ext_resource type="PhysicsMaterial" uid="uid://baifveh640c1m" path="res://materials/physics_friction.tres" id="2_1bvp3"]
 [ext_resource type="Shader" uid="uid://cyolrnj113mxo" path="res://shaders/floor.gdshader" id="2_h2yge"]
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 1
+background_color = Color(0.138034, 0.138034, 0.138034, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.533333, 0.533333, 0.533333, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
 size = Vector3(1000, 1, 1000)
@@ -37,6 +43,9 @@ size = Vector3(100, 1, 100)
 
 [node name="Main" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h2yge")
+
 [node name="Player" parent="." instance=ExtResource("1_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
@@ -53,5 +62,6 @@ skeleton = NodePath("../..")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0, 0.866025, 0.5, 3.55271e-15, -0.5, 0.866025, 1, 1.77636e-15, -3.07674e-15, 0, 30, 0)
-light_energy = 1.5
+light_color = Color(0.938865, 0.90377, 0.865132, 1)
+light_energy = 2.0
 shadow_enabled = true
