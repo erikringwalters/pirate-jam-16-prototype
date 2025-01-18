@@ -11,16 +11,16 @@ ambient_light_source = 2
 ambient_light_color = Color(0.533333, 0.533333, 0.533333, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
-size = Vector3(1000, 1, 1000)
+size = Vector3(100, 1, 100)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
 render_priority = 0
 shader = ExtResource("2_h2yge")
 shader_parameter/subdivisions = 32.0
 shader_parameter/grid_width = 0.02
-shader_parameter/background_color = Color(0.194695, 0.0380528, 0.00679337, 1)
-shader_parameter/background_color_two = Color(0.432624, 0.432624, 0.432624, 1)
-shader_parameter/grid_color = Color(0.188371, 0.188371, 0.188371, 1)
+shader_parameter/background_color = Color(0.158999, 0.0604092, 0.00201173, 1)
+shader_parameter/background_color_two = Color(0.158938, 0.23814, 0.290237, 1)
+shader_parameter/grid_color = Color(0, 0, 0, 1)
 shader_parameter/dashed_scale_x = 0.02
 shader_parameter/dashed_scale_y = 0.02
 shader_parameter/dashed_count_x = 1.0
@@ -31,7 +31,7 @@ shader_parameter/point_scale_x = 0.05
 shader_parameter/point_scale_y = 0.05
 shader_parameter/inside_width = 0.01
 shader_parameter/inside_subdivisions = 6.0
-shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/inside_color = Color(0.716296, 0.716296, 0.716296, 1)
 shader_parameter/in_dashed_scale_x = 0.3
 shader_parameter/in_dashed_scale_y = 0.3
 shader_parameter/in_dashed_count_x = 6.0
@@ -50,15 +50,14 @@ environment = SubResource("Environment_h2yge")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 physics_material_override = ExtResource("2_1bvp3")
 
 [node name="FloorCollision" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_1bvp3")
 
-[node name="FloorMesh" type="MeshInstance3D" parent="Floor/FloorCollision"]
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("BoxMesh_7mycd")
-skeleton = NodePath("../..")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0, 0.866025, 0.5, 3.55271e-15, -0.5, 0.866025, 1, 1.77636e-15, -3.07674e-15, 0, 30, 0)

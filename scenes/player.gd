@@ -6,7 +6,7 @@ extends RigidBody3D
 @export_range(1.0, 10.0) var camera_stick_mult := 10.0
 
 @export_group("Movement")
-@export var move_speed := 12.0
+@export var move_speed := 16.0
 @export var acceleration := 50.0
 @export var rotation_speed := 12.0
 @export var jump_speed := 5.0
@@ -17,10 +17,6 @@ var _camera_input_direction := Vector2.ZERO
 
 @onready var _camera_pivot:Node3D = %CameraPivot
 @onready var _camera:Camera3D = %Camera
-#@onready var _collision:CollisionShape3D = %Collision
-#@onready var _ground_detector:Area3D = %GroundDetector
-#@onready var _ground_detector_mesh:MeshInstance3D = %GroundDetectorMesh
-#@onready var _jump_timer:Timer = %JumpTimer
 
 func _ready() -> void:
 	%CameraPivot.top_level = true
@@ -76,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	move_direction.y = 0.0
 	move_direction = move_direction.normalized() * move_direction.length()
 	
-	print(move_direction)
+	#print(move_direction)
 	
 	var vel = angular_velocity.move_toward(move_direction * move_speed, acceleration * delta)
 	angular_velocity.x = clamp(vel.x, -move_speed, move_speed)
