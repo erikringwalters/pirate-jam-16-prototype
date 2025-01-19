@@ -79,6 +79,7 @@ func _on_pickup_body_entered(body: Node3D) -> void:
 	print(body)
 	if(body.is_in_group("Pickup") && body.is_in_group("NoCollision")):
 		body.reparent(self, true)
-		body.process_mode = Node.PROCESS_MODE_DISABLED
-	if(body.is_in_group("Pickup") && body.is_in_group("GroundCollision")):
+		body.set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
+	elif(body.is_in_group("Pickup") && body.is_in_group("GroundCollision")):
 		body.get_node("CollisionShape3D").reparent(self, true)
+		body.queue_free()
