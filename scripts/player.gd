@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 	var camera_stick_rotation = (camera_stick_input * camera_stick_mult * camera_stick_sensitivity)
 	
 	_camera_pivot.rotation.x -= (_camera_input_direction.y + camera_stick_rotation.y) * get_physics_process_delta_time()
-	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, -PI / 2.01, 0.0)
+	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, -PI / 2.5, 0.0)
 	_camera_pivot.rotation.y -= (_camera_input_direction.x + camera_stick_rotation.x) * get_physics_process_delta_time()
 	
 	_camera_input_direction = Vector2.ZERO

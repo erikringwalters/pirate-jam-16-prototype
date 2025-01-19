@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_ieojg"]
 [ext_resource type="PackedScene" uid="uid://5m03qf0byasr" path="res://assets/weapons/Dagger.fbx" id="1_lw0yl"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_236xm"]
-radius = 0.1
-height = 1.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_ieojg"]
+size = Vector3(0.2, 1.2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ud4yb"]
 albedo_color = Color(0, 0.696657, 0.366257, 1)
@@ -15,17 +14,20 @@ material = SubResource("StandardMaterial3D_ud4yb")
 radius = 0.15
 
 [node name="Dagger_PickupItem" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_ieojg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_236xm")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_ieojg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 visible = false
 mesh = SubResource("CapsuleMesh_xv72k")
 
 [node name="Dagger" parent="CollisionShape3D" instance=ExtResource("1_lw0yl")]
-transform = Transform3D(-1.31134e-07, 1.31134e-07, 3, 1.31134e-07, 3, -1.31134e-07, -3, 1.31134e-07, -1.31134e-07, -4.29283e-09, -0.0982085, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -4.29283e-09, -0.0982085, 0)
+
+[node name="Anchor" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18557e-08, -0.5, 0)

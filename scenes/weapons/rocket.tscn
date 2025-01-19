@@ -3,19 +3,18 @@
 [ext_resource type="PackedScene" uid="uid://bmxot2bs7v0bt" path="res://assets/weapons/Rocket.fbx" id="1_6gyb8"]
 [ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_kjqmh"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_236xm"]
-radius = 0.15
-height = 2.5
+[sub_resource type="BoxShape3D" id="BoxShape3D_kjqmh"]
+size = Vector3(0.2, 2.5, 0.2)
 
 [node name="RocketLauncher_PickupItem" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_kjqmh")
 is_projectile_weapon = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_236xm")
+shape = SubResource("BoxShape3D_kjqmh")
 
 [node name="RayCast3D" type="RayCast3D" parent="CollisionShape3D"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.000982918, 0.68569, 0)
