@@ -102,17 +102,17 @@ transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.371
 [node name="PickupItemGroundCollision5" parent="." instance=ExtResource("5_lquwl")]
 transform = Transform3D(-3.09086e-08, -0.707107, 0.707107, 1, -4.37114e-08, 0, 3.09086e-08, 0.707107, 0.707107, -7, 1, 11)
 
-[node name="PickupItemGroundCollision6" parent="." instance=ExtResource("6_272bh")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4.3594, 0.15, 2.32706)
+[node name="Dagger_PickupItem" parent="." instance=ExtResource("6_272bh")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.446518, 0.18589, 2.17957)
 
-[node name="PickupItemGroundCollision7" parent="." instance=ExtResource("7_5vw27")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.60161, 0.15, 3.7053)
+[node name="Handgun_PickupItem" parent="." instance=ExtResource("9_efxa6")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -2.95024, 0.18589, 2.17957)
 
-[node name="PickupItemGroundCollision8" parent="." instance=ExtResource("8_4c57u")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1, 0, 4)
+[node name="Shotgun_PickupItem" parent="." instance=ExtResource("10_dg77c")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.68421, 0.18589, 3.96507)
 
-[node name="PickupItemGroundCollision9" parent="." instance=ExtResource("9_efxa6")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -3, 1, 3)
+[node name="Shotgun_PickupItem2" parent="." instance=ExtResource("7_5vw27")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 3.20685, 0.18589, 3.21965)
 
-[node name="PickupItemGroundCollision10" parent="." instance=ExtResource("10_dg77c")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -5, 1, 1)
+[node name="Sword_PickupItem" parent="." instance=ExtResource("8_4c57u")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -5.88738, 0.18589, 2.17957)

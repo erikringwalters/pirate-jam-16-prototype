@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bo4r5t2hvavcu"]
+[gd_scene load_steps=6 format=3 uid="uid://bo4r5t2hvavcu"]
 
+[ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scenes/weapons/weapon.gd" id="1_0frcf"]
 [ext_resource type="PackedScene" uid="uid://cyowyrjvxowkj" path="res://assets/weapons/Shotgun.fbx" id="1_o616w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_236xm"]
@@ -13,13 +14,18 @@ albedo_color = Color(0, 0.696657, 0.366257, 1)
 material = SubResource("StandardMaterial3D_ud4yb")
 radius = 0.15
 
-[node name="PickupItemGroundCollision" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
+[node name="Shotgun_PickupItem" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 5
 collision_mask = 5
+script = ExtResource("1_0frcf")
+is_projectile_weapon = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_236xm")
+
+[node name="RayCast3D" type="RayCast3D" parent="CollisionShape3D"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.0730817, 0.535276, 0)
 
 [node name="Shotgun" parent="CollisionShape3D" instance=ExtResource("1_o616w")]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0273829, 0.0246046, 0)

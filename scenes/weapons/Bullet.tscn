@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci34283omx87h"]
+
+[ext_resource type="Script" uid="uid://bf2dlwf4sjkbx" path="res://scenes/weapons/Bullet.gd" id="1_abmkb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mgj1w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uda7o"]
+albedo_color = Color(0.85, 0.538333, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.424206, 0.0779518, 1)
+emission_energy_multiplier = 5.0
+
+[node name="Bullet" type="Node3D"]
+transform = Transform3D(0.475, 0, 0, 0, 0.07, 0, 0, 0, 0.105, 0, 0, 0)
+script = ExtResource("1_abmkb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_mgj1w")
+surface_material_override/0 = SubResource("StandardMaterial3D_uda7o")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1.31134e-07, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, -1.31134e-07, -5.73206e-15, 0, 0, 0)
+
+[node name="Life" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="Life" to="." method="_on_life_timeout"]
