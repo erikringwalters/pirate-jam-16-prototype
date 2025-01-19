@@ -13,5 +13,6 @@ grow_amount = 0.04
 next_pass = SubResource("StandardMaterial3D_6qmju")
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
+albedo_color = Color(0.245984, 0.245984, 0.245984, 1)
+metallic = 0.6
 roughness = 0.04

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ct0tti2mfck6l"]
+[gd_scene load_steps=9 format=3 uid="uid://ct0tti2mfck6l"]
 
 [ext_resource type="PackedScene" uid="uid://bwge4babpy161" path="res://scenes/player.tscn" id="1_0xm2m"]
 [ext_resource type="PhysicsMaterial" uid="uid://baifveh640c1m" path="res://materials/physics_friction.tres" id="2_1bvp3"]
 [ext_resource type="Shader" uid="uid://cyolrnj113mxo" path="res://shaders/floor.gdshader" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dqodrp0dyot7f" path="res://scenes/pickup_item_no_collision.tscn" id="4_1bvp3"]
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1
@@ -26,7 +27,7 @@ shader_parameter/dashed_scale_y = 0.02
 shader_parameter/dashed_count_x = 1.0
 shader_parameter/dashed_count_y = 1.0
 shader_parameter/point_width = 0.021
-shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_color = Color(0.272655, 0.272655, 0.272655, 1)
 shader_parameter/point_scale_x = 0.05
 shader_parameter/point_scale_y = 0.05
 shader_parameter/inside_width = 0.01
@@ -64,3 +65,18 @@ transform = Transform3D(0, 0.866025, 0.5, 3.55271e-15, -0.5, 0.866025, 1, 1.7763
 light_color = Color(0.938865, 0.90377, 0.865132, 1)
 light_energy = 2.0
 shadow_enabled = true
+
+[node name="PickupItemNoCollision" parent="." groups=["NoCollision", "Pickup"] instance=ExtResource("4_1bvp3")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 7, 1, 7)
+
+[node name="PickupItemNoCollision2" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 7, 1, 15)
+
+[node name="PickupItemNoCollision3" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 11, 1, 11)
+
+[node name="PickupItemNoCollision4" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 3, 1, 11)
+
+[node name="PickupItemNoCollision5" parent="." instance=ExtResource("4_1bvp3")]
+transform = Transform3D(-3.09086e-08, -0.707107, 0.707107, 1, -4.37114e-08, 0, 3.09086e-08, 0.707107, 0.707107, 7, 1, 11)
