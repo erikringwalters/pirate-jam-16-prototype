@@ -9,7 +9,7 @@ func _ready():
 	$Life.start()
 	pass
 	
-func _physics_process(delta):
+func _process(delta):
 	position += transform.basis * Vector3(0, -SPEED, 0) * delta
 
 

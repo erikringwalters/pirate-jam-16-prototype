@@ -41,7 +41,7 @@ func shoot() -> void:
 	get_parent().add_child(instance);
 	
 	
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("manual_shoot") \
 	and is_projectile_weapon \
 	and can_shoot \
