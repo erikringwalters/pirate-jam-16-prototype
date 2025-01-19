@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bwge4babpy161"]
 
 [ext_resource type="Material" uid="uid://uutp0378pri2" path="res://materials/mace_metal.tres" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://bfhms1gcomxln" path="res://scenes/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://bfhms1gcomxln" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PhysicsMaterial" uid="uid://baifveh640c1m" path="res://materials/physics_friction.tres" id="1_qhqgy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1bvp3"]

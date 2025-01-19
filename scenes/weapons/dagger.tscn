@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://dnab25acrgyoy"]
 
-[ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scenes/weapons/weapon.gd" id="1_ieojg"]
+[ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_ieojg"]
 [ext_resource type="PackedScene" uid="uid://5m03qf0byasr" path="res://assets/weapons/Dagger.fbx" id="1_lw0yl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_236xm"]
-radius = 0.15
-height = 0.515753
+radius = 0.1
+height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ud4yb"]
 albedo_color = Color(0, 0.696657, 0.366257, 1)
@@ -28,4 +28,4 @@ visible = false
 mesh = SubResource("CapsuleMesh_xv72k")
 
 [node name="Dagger" parent="CollisionShape3D" instance=ExtResource("1_lw0yl")]
-transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -1, 4.37114e-08, -4.37114e-08, -4.29283e-09, -0.0982085, 0)
+transform = Transform3D(-1.31134e-07, 1.31134e-07, 3, 1.31134e-07, 3, -1.31134e-07, -3, 1.31134e-07, -1.31134e-07, -4.29283e-09, -0.0982085, 0)

@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://obopymb5flt6"]
 
-[ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scenes/weapons/weapon.gd" id="1_3pnln"]
+[ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_3pnln"]
 [ext_resource type="PackedScene" uid="uid://b1uek6f4hf7b0" path="res://assets/weapons/Sword.fbx" id="1_lbead"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_236xm"]
 radius = 0.15
-height = 1.09283
+height = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ud4yb"]
 albedo_color = Color(0, 0.696657, 0.366257, 1)
@@ -28,4 +28,4 @@ visible = false
 mesh = SubResource("CapsuleMesh_xv72k")
 
 [node name="Sword" parent="CollisionShape3D" instance=ExtResource("1_lbead")]
-transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 4.37114e-08, 1, 4.37114e-08, 1, -4.37114e-08, -4.37114e-08, -1.51114e-08, -0.345709, 0)
+transform = Transform3D(-1.09278e-07, 1.09278e-07, -2.5, 1.09278e-07, 2.5, 1.09278e-07, 2.5, -1.09278e-07, -1.09278e-07, -1.51114e-08, -0.345709, 0)

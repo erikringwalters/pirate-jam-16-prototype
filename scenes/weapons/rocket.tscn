@@ -1,20 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://hjn3ta46v6nr"]
+[gd_scene load_steps=4 format=3 uid="uid://hjn3ta46v6nr"]
 
 [ext_resource type="PackedScene" uid="uid://bmxot2bs7v0bt" path="res://assets/weapons/Rocket.fbx" id="1_6gyb8"]
-[ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scenes/weapons/weapon.gd" id="1_kjqmh"]
+[ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_kjqmh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_236xm"]
 radius = 0.15
-height = 1.40617
+height = 2.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ud4yb"]
-albedo_color = Color(0, 0.696657, 0.366257, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xv72k"]
-material = SubResource("StandardMaterial3D_ud4yb")
-radius = 0.15
-
-[node name="Shotgun_PickupItem" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
+[node name="RocketLauncher_PickupItem" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 collision_layer = 5
 collision_mask = 5
@@ -27,9 +20,5 @@ shape = SubResource("CapsuleShape3D_236xm")
 [node name="RayCast3D" type="RayCast3D" parent="CollisionShape3D"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.000982918, 0.68569, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-visible = false
-mesh = SubResource("CapsuleMesh_xv72k")
-
 [node name="Rocket" parent="CollisionShape3D" instance=ExtResource("1_6gyb8")]
-transform = Transform3D(-1.66103e-08, 0.38, 0, -0.38, -1.66103e-08, 0, 0, 0, 0.38, 2.30443e-09, 0.0527193, 0)
+transform = Transform3D(-3.27835e-08, 0.75, 0, -0.75, -3.27835e-08, 0, 0, 0, 0.75, 2.30443e-09, 0.0527193, 0)

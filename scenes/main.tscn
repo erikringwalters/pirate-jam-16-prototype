@@ -1,15 +1,15 @@
 [gd_scene load_steps=15 format=3 uid="uid://ct0tti2mfck6l"]
 
-[ext_resource type="PackedScene" uid="uid://bwge4babpy161" path="res://scenes/player.tscn" id="1_0xm2m"]
-[ext_resource type="PhysicsMaterial" uid="uid://baifveh640c1m" path="res://materials/physics_friction.tres" id="2_1bvp3"]
-[ext_resource type="Shader" uid="uid://cyolrnj113mxo" path="res://shaders/floor.gdshader" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://dqodrp0dyot7f" path="res://scenes/pickup_item_no_collision.tscn" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://dlp1bs8xos8hq" path="res://scenes/pickup_item_ground_collision.tscn" id="5_lquwl"]
-[ext_resource type="PackedScene" uid="uid://dnab25acrgyoy" path="res://scenes/weapons/dagger.tscn" id="6_272bh"]
-[ext_resource type="PackedScene" uid="uid://bo4r5t2hvavcu" path="res://scenes/weapons/shotgun.tscn" id="7_5vw27"]
-[ext_resource type="PackedScene" uid="uid://obopymb5flt6" path="res://scenes/weapons/sword.tscn" id="8_4c57u"]
-[ext_resource type="PackedScene" uid="uid://ch5f82om4wwn7" path="res://scenes/weapons/handgun.tscn" id="9_efxa6"]
-[ext_resource type="PackedScene" uid="uid://hjn3ta46v6nr" path="res://scenes/weapons/rocket.tscn" id="10_dg77c"]
+[ext_resource type="PackedScene" uid="uid://bwge4babpy161" path="res://scenes/player/player.tscn" id="1_choun"]
+[ext_resource type="PhysicsMaterial" uid="uid://baifveh640c1m" path="res://materials/physics_friction.tres" id="2_ya4ey"]
+[ext_resource type="Shader" uid="uid://cyolrnj113mxo" path="res://shaders/floor.gdshader" id="3_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://dqodrp0dyot7f" path="res://scenes/pickup_test_item/pickup_item_no_collision.tscn" id="4_trceg"]
+[ext_resource type="PackedScene" uid="uid://dlp1bs8xos8hq" path="res://scenes/pickup_test_item/pickup_item_ground_collision.tscn" id="5_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://dnab25acrgyoy" path="res://scenes/weapons/dagger.tscn" id="6_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://ch5f82om4wwn7" path="res://scenes/weapons/handgun.tscn" id="7_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://hjn3ta46v6nr" path="res://scenes/weapons/rocket.tscn" id="8_muem4"]
+[ext_resource type="PackedScene" uid="uid://bo4r5t2hvavcu" path="res://scenes/weapons/shotgun.tscn" id="9_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://obopymb5flt6" path="res://scenes/weapons/sword.tscn" id="10_0ld40"]
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1
@@ -22,7 +22,7 @@ size = Vector3(100, 1, 100)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
 render_priority = 0
-shader = ExtResource("2_h2yge")
+shader = ExtResource("3_eb6dy")
 shader_parameter/subdivisions = 32.0
 shader_parameter/grid_width = 0.02
 shader_parameter/background_color = Color(0.158999, 0.0604092, 0.00201173, 1)
@@ -53,12 +53,12 @@ size = Vector3(100, 1, 100)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h2yge")
 
-[node name="Player" parent="." instance=ExtResource("1_0xm2m")]
+[node name="Player" parent="." instance=ExtResource("1_choun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-physics_material_override = ExtResource("2_1bvp3")
+physics_material_override = ExtResource("2_ya4ey")
 
 [node name="FloorCollision" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_1bvp3")
@@ -72,47 +72,47 @@ light_color = Color(0.938865, 0.90377, 0.865132, 1)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="PickupItemNoCollision" parent="." instance=ExtResource("4_1bvp3")]
+[node name="PickupItemNoCollision" parent="." instance=ExtResource("4_trceg")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 7, 1, 7)
 
-[node name="PickupItemNoCollision2" parent="." instance=ExtResource("4_1bvp3")]
+[node name="PickupItemNoCollision2" parent="." instance=ExtResource("4_trceg")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 7, 1, 15)
 
-[node name="PickupItemNoCollision3" parent="." instance=ExtResource("4_1bvp3")]
+[node name="PickupItemNoCollision3" parent="." instance=ExtResource("4_trceg")]
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 11, 1, 11)
 
-[node name="PickupItemNoCollision4" parent="." instance=ExtResource("4_1bvp3")]
+[node name="PickupItemNoCollision4" parent="." instance=ExtResource("4_trceg")]
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 3, 1, 11)
 
-[node name="PickupItemNoCollision5" parent="." instance=ExtResource("4_1bvp3")]
+[node name="PickupItemNoCollision5" parent="." instance=ExtResource("4_trceg")]
 transform = Transform3D(-3.09086e-08, -0.707107, 0.707107, 1, -4.37114e-08, 0, 3.09086e-08, 0.707107, 0.707107, 7, 1, 11)
 
-[node name="PickupItemGroundCollision" parent="." instance=ExtResource("5_lquwl")]
+[node name="PickupItemGroundCollision" parent="." instance=ExtResource("5_a8y0u")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -7, 1, 7)
 
-[node name="PickupItemGroundCollision2" parent="." instance=ExtResource("5_lquwl")]
+[node name="PickupItemGroundCollision2" parent="." instance=ExtResource("5_a8y0u")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -7, 1, 15)
 
-[node name="PickupItemGroundCollision3" parent="." instance=ExtResource("5_lquwl")]
+[node name="PickupItemGroundCollision3" parent="." instance=ExtResource("5_a8y0u")]
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -3, 1, 11)
 
-[node name="PickupItemGroundCollision4" parent="." instance=ExtResource("5_lquwl")]
+[node name="PickupItemGroundCollision4" parent="." instance=ExtResource("5_a8y0u")]
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -11, 1, 11)
 
-[node name="PickupItemGroundCollision5" parent="." instance=ExtResource("5_lquwl")]
+[node name="PickupItemGroundCollision5" parent="." instance=ExtResource("5_a8y0u")]
 transform = Transform3D(-3.09086e-08, -0.707107, 0.707107, 1, -4.37114e-08, 0, 3.09086e-08, 0.707107, 0.707107, -7, 1, 11)
 
-[node name="Dagger_PickupItem" parent="." instance=ExtResource("6_272bh")]
+[node name="Dagger_PickupItem" parent="." instance=ExtResource("6_jkv2x")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.446518, 0.18589, 2.17957)
 
-[node name="Handgun_PickupItem" parent="." instance=ExtResource("9_efxa6")]
+[node name="Handgun_PickupItem" parent="." instance=ExtResource("7_jbj1t")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -2.95024, 0.18589, 2.17957)
 
-[node name="Shotgun_PickupItem" parent="." instance=ExtResource("10_dg77c")]
+[node name="RocketLauncher_PickupItem" parent="." instance=ExtResource("8_muem4")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.68421, 0.18589, 3.96507)
 
-[node name="Shotgun_PickupItem2" parent="." instance=ExtResource("7_5vw27")]
+[node name="Shotgun_PickupItem" parent="." instance=ExtResource("9_dp3eg")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 3.20685, 0.18589, 3.21965)
 
-[node name="Sword_PickupItem" parent="." instance=ExtResource("8_4c57u")]
+[node name="Sword_PickupItem" parent="." instance=ExtResource("10_0ld40")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -5.88738, 0.18589, 2.17957)
