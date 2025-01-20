@@ -4,7 +4,7 @@ extends Node3D
 @export var is_projectile_weapon : bool = false
 
 @export_category("Projectile Type")
-@export var projectile_object : String = "res://scenes/weapons/bullet.tscn"
+@onready var projectile_scene : PackedScene = Items.projectile_scene
 @export var cooldown : float = 0.8 
 
 @onready var is_pickedup = true
@@ -15,7 +15,6 @@ var curr_cooldown
 var can_shoot
 var gun_barrel
 var projectile
-var instance
 
 func _ready() -> void:
 	if (is_projectile_weapon):
@@ -23,7 +22,6 @@ func _ready() -> void:
 		can_shoot = true
 		_raycast = %RayCast
 		gun_barrel = _raycast
-		projectile = load(projectile_object)
 
 func _process(delta) -> void:
 	if (is_projectile_weapon):
@@ -33,10 +31,10 @@ func _process(delta) -> void:
 			curr_cooldown = cooldown
 
 func shoot() -> void:
-	instance = projectile.instantiate()
-	instance.position = gun_barrel.global_position
-	instance.transform.basis = gun_barrel.global_transform.basis
-	get_parent().add_child(instance);
+	projectile = projectile_scene.instantiate()
+	projectile.position = gun_barrel.global_position
+	projectile.transform.basis = gun_barrel.global_transform.basis
+	get_parent().add_child(projectile)
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("manual_shoot") \

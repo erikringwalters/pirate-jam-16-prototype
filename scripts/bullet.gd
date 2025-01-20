@@ -7,11 +7,9 @@ const SPEED = 40.0
 
 func _ready():
 	$Life.start()
-	pass
-	
+
 func _physics_process(delta):
 	position += transform.basis * Vector3(0, -SPEED, 0) * delta
-
 
 # Despawn the bullet after some time
 func _on_life_timeout() -> void:

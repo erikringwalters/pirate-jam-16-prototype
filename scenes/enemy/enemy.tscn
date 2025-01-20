@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqtfijlj7vwni"]
+[gd_scene load_steps=6 format=3 uid="uid://cqtfijlj7vwni"]
 
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_4a83h"]
+[ext_resource type="Script" uid="uid://1a81wjttwnhm" path="res://scripts/enemy.gd" id="1_4a83h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_883im"]
 
@@ -9,6 +9,10 @@ albedo_color = Color(0.640328, 0, 0.138643, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4a83h"]
 material = SubResource("StandardMaterial3D_883im")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4a83h"]
+radius = 0.55
+height = 2.1
 
 [node name="Enemy" type="RigidBody3D"]
 axis_lock_angular_x = true
@@ -20,6 +24,11 @@ shape = SubResource("CapsuleShape3D_883im")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RBCollision"]
 mesh = SubResource("CapsuleMesh_4a83h")
+
+[node name="HitBox" type="Area3D" parent="RBCollision"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RBCollision/HitBox"]
+shape = SubResource("CapsuleShape3D_4a83h")
 
 [node name="WeaponMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0.5)

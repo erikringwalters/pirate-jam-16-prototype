@@ -11,7 +11,6 @@ extends RigidBody3D
 @export var acceleration := 50.0
 
 var _camera_input_direction := Vector2.ZERO
-var _picked_body:PhysicsBody3D = null
 
 @onready var _camera_pivot:Node3D = %CameraPivot
 @onready var _camera:Camera3D = %Camera
@@ -61,8 +60,6 @@ func _physics_process(delta: float) -> void:
 		"move_left", 
 	)
 	
-	# TODO: Check movement speed when camera is high up
-	
 	var forward := _camera.global_basis.z
 	var right := _camera.global_basis.x
 	
@@ -74,16 +71,12 @@ func _physics_process(delta: float) -> void:
 	angular_velocity.x = clamp(vel.x, -move_speed, move_speed)
 	angular_velocity.y = 0.0
 	angular_velocity.z = clamp(vel.z, -move_speed, move_speed)
-	#print(angular_velocity)
-	if _picked_body != null:
-		print(_picked_body.global_transform.origin)
 
 func _on_pickup_body_entered(body: Node3D) -> void:
 	print(body)
-	if(body.is_in_group("Pickup") && body.is_in_group("NoCollision")):
-		body.reparent(self, true)
-		body.set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
-	elif(body.is_in_group("Pickup") && body.is_in_group("GroundCollision")):
+	if(body.is_in_group("Pickup") && body.is_in_group("GroundCollision")):
 		body.get_node("RBCollision").reparent(self, true)
 		body.freeze = true
-		#_picked_body = body
+	elif(body.is_in_group("Pickup") && body.is_in_group("NoCollision")):
+		body.reparent(self, true)
+		body.set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
