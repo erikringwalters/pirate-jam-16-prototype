@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://obopymb5flt6"]
+[gd_scene load_steps=7 format=3 uid="uid://obopymb5flt6"]
 
 [ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_3pnln"]
 [ext_resource type="PackedScene" uid="uid://b1uek6f4hf7b0" path="res://assets/weapons/Sword.fbx" id="1_lbead"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3pnln"]
-size = Vector3(0.2, 2, 0.1)
+size = Vector3(0.1, 1.5, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ud4yb"]
 albedo_color = Color(0, 0.696657, 0.366257, 1)
@@ -13,18 +13,29 @@ albedo_color = Color(0, 0.696657, 0.366257, 1)
 material = SubResource("StandardMaterial3D_ud4yb")
 radius = 0.15
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_58ehi"]
+size = Vector3(0.15, 1.6, 0.15)
+
 [node name="Sword_PickupItem" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_3pnln")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="RBCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_3pnln")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RBCollision"]
 visible = false
 mesh = SubResource("CapsuleMesh_xv72k")
 
-[node name="Sword" parent="CollisionShape3D" instance=ExtResource("1_lbead")]
+[node name="Sword" parent="RBCollision" instance=ExtResource("1_lbead")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -2.82248e-08, -0.645709, 0)
+
+[node name="HitBox" type="Area3D" parent="RBCollision"]
+
+[node name="HitBoxCollision" type="CollisionShape3D" parent="RBCollision/HitBox"]
+shape = SubResource("BoxShape3D_58ehi")
+
+[node name="Anchor" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1, 4.37114e-08)

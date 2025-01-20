@@ -26,7 +26,7 @@ physics_material_override = ExtResource("1_qhqgy")
 center_of_mass_mode = 1
 script = ExtResource("1_g2els")
 
-[node name="BallCollision" type="CollisionShape3D" parent="."]
+[node name="RBCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_1bvp3")
 
 [node name="BallMesh" type="MeshInstance3D" parent="."]
@@ -46,12 +46,12 @@ spring_length = 8.0
 [node name="Camera" type="Camera3D" parent="CameraPivot/SpringArm"]
 unique_name_in_owner = true
 
-[node name="Pickup" type="Area3D" parent="."]
+[node name="HitBox" type="Area3D" parent="."]
 unique_name_in_owner = true
 collision_layer = 4
 collision_mask = 4
 
-[node name="PickupCollision" type="CollisionShape3D" parent="Pickup"]
+[node name="HitBoxCollision" type="CollisionShape3D" parent="HitBox"]
 shape = SubResource("SphereShape3D_ig7tw")
 
 [node name="SpikeMeshes" type="Node3D" parent="."]
@@ -86,5 +86,5 @@ transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, 0.5, -5.
 mesh = SubResource("CylinderMesh_7mycd")
 skeleton = NodePath("../..")
 
-[connection signal="area_entered" from="Pickup" to="." method="_on_pickup_area_entered"]
-[connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_pickup_area_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_pickup_body_entered"]

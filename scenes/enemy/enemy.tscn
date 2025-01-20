@@ -15,10 +15,10 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_4a83h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="RBCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_883im")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RBCollision"]
 mesh = SubResource("CapsuleMesh_4a83h")
 
 [node name="WeaponMarker" type="Marker3D" parent="."]

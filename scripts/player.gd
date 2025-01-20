@@ -1,6 +1,7 @@
 extends RigidBody3D
 
 @export_group("Camera")
+# Mouse sensitivity should be low because on browser sensitivity is way higher
 @export_range(0.0, 1.0) var camera_mouse_sensitivity := 0.25
 @export_range(0.0, 1.0) var camera_stick_sensitivity := 0.5
 @export_range(1.0, 10.0) var camera_stick_mult := 10.0
@@ -83,6 +84,6 @@ func _on_pickup_body_entered(body: Node3D) -> void:
 		body.reparent(self, true)
 		body.set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
 	elif(body.is_in_group("Pickup") && body.is_in_group("GroundCollision")):
-		body.get_node("CollisionShape3D").reparent(self, true)
+		body.get_node("RBCollision").reparent(self, true)
 		body.freeze = true
 		#_picked_body = body

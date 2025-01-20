@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bo4r5t2hvavcu"]
+[gd_scene load_steps=5 format=3 uid="uid://bo4r5t2hvavcu"]
 
 [ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_0frcf"]
 [ext_resource type="PackedScene" uid="uid://cyowyrjvxowkj" path="res://assets/weapons/Shotgun.fbx" id="1_o616w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0frcf"]
 size = Vector3(0.15, 1.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_278ir"]
+size = Vector3(0.2, 1.6, 0.15)
 
 [node name="Shotgun_PickupItem" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -13,11 +16,20 @@ collision_mask = 5
 script = ExtResource("1_0frcf")
 is_projectile_weapon = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="RBCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_0frcf")
 
-[node name="RayCast3D" type="RayCast3D" parent="CollisionShape3D"]
+[node name="RayCast" type="RayCast3D" parent="RBCollision"]
+unique_name_in_owner = true
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.043, 1.035, 0)
 
-[node name="Shotgun" parent="CollisionShape3D" instance=ExtResource("1_o616w")]
+[node name="Shotgun" parent="RBCollision" instance=ExtResource("1_o616w")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, -0.05, 0.025, 0)
+
+[node name="HitBox" type="Area3D" parent="RBCollision"]
+
+[node name="HitBoxCollision" type="CollisionShape3D" parent="RBCollision/HitBox"]
+shape = SubResource("BoxShape3D_278ir")
+
+[node name="Anchor" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.2, -1, 4.37114e-08)
