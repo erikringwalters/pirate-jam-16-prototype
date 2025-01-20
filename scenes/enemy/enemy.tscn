@@ -31,4 +31,5 @@ mesh = SubResource("CapsuleMesh_4a83h")
 shape = SubResource("CapsuleShape3D_4a83h")
 
 [node name="WeaponMarker" type="Marker3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0.5)
