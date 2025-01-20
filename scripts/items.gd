@@ -8,11 +8,10 @@ var weapons : Dictionary = {
 	"Rocket" : ""
 }
 
-var projectiles : Dictionary = {
-	"Bullet" : "res://scenes/weapons/bullet.tscn"
+@onready var projectiles : Dictionary = {
+	"Bullet" : ResourceLoader.load("res://scenes/weapons/bullet.tscn"),
+	"Rocket" : ResourceLoader.load("res://scenes/weapons/rocket_projectile.tscn"),
 }
-
-@onready var projectile_scene : PackedScene = ResourceLoader.load(projectiles["Bullet"])
 
 func _ready() -> void:
 	for weapon in weapons.keys():
