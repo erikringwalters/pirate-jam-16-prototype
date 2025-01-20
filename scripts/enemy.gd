@@ -8,4 +8,4 @@ func _ready() -> void:
 	weapon.global_transform.origin = _weapon_marker.global_transform.origin
 
 func _physics_process(_delta: float) -> void:
-	pass
+	look_at(get_parent().get_node("Player").global_transform.origin)
