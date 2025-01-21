@@ -12,7 +12,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Look at player # TODO: Slowly look toward player to give player a chance to avoid/kite
-	look_at(get_parent().get_node("Player").global_transform.origin)
+	var look_direction = get_angle(
+		global_transform.origin, 
+		get_parent().get_node("Player").global_transform.origin
+	)
+	global_rotation.y = look_direction - deg_to_rad(90)
 	
 	# Move toward player
 	var move_direction := global_basis.z
@@ -22,3 +26,6 @@ func _physics_process(delta: float) -> void:
 	linear_velocity.x = clamp(vel.x, -move_speed, move_speed)
 	linear_velocity.y = 0.0
 	linear_velocity.z = clamp(vel.z, -move_speed, move_speed)
+
+func get_angle(a:Vector3, b:Vector3) -> float:
+	return -atan2((b.z - a.z), (b.x - a.x))
