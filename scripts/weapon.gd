@@ -9,14 +9,12 @@ extends Node3D
 
 @export_category("Projectile Type")
 @export_enum("Bullet", "Rocket") var projectile_type : String 
-@export var cooldown : float = 0.8 
 @export var scatter_shot : bool = false
 
 @onready var is_pickedup = false
 var _raycast:RayCast3D
 
 # Conditional projectile weapon variables, will remain null if not projectile
-var curr_cooldown
 var can_shoot
 var gun_barrel
 var projectile_scene
@@ -34,9 +32,7 @@ func _ready() -> void:
 		projectile_scene = Items.projectiles[projectile_type]
 	else: # Default if no projectile type is selected
 		projectile_scene = Items.projectiles['Bullet']
-		
 	if (is_projectile_weapon):
-		curr_cooldown = cooldown
 		can_shoot = true
 		_raycast = %RayCast
 		gun_barrel = _raycast
@@ -47,27 +43,17 @@ func _physics_process(_delta: float) -> void:
 	and can_shoot \
 	and is_pickedup:
 		shoot()
-		curr_cooldown = cooldown
 		can_shoot = false
-
-
-func _process(delta) -> void:
-	if (is_projectile_weapon):
-		curr_cooldown -= delta
-		if (curr_cooldown <= 0):
-			can_shoot = true
-			curr_cooldown = cooldown
-
 
 func shoot() -> void:
 	if (scatter_shot):
-		# Spawn five bullets
+		# Spawn ten bullets
 		for i in range(10):
 			projectile = projectile_scene.instantiate()
 			projectile.position = gun_barrel.global_position
 			projectile.transform.basis = gun_barrel.global_transform.basis
-			projectile.set_collision_layers(is_pickedup)
-			
+			projectile.set_damage(damage)
+			projectile.set_collision_layers(is_pickedup)		
 			# Randomly rotate each axis
 			var axis = Vector3(1, 0, 0)
 			var rotation_amount = float((randi() % 180) - 90)/1000
@@ -77,17 +63,15 @@ func shoot() -> void:
 			projectile.transform.basis = projectile.transform.basis.rotated(axis, rotation_amount)
 			axis = Vector3(0, 0, 1)
 			rotation_amount = float((randi() % 180) - 90)/1000
-			projectile.transform.basis = projectile.transform.basis.rotated(axis, rotation_amount)
-			
+			projectile.transform.basis = projectile.transform.basis.rotated(axis, rotation_amount)		
 			get_parent().add_child(projectile)
 	else:
 		projectile = projectile_scene.instantiate()
 		projectile.position = gun_barrel.global_position
 		projectile.transform.basis = gun_barrel.global_transform.basis
+		projectile.set_damage(damage)
 		projectile.set_collision_layers(is_pickedup)
 		get_parent().add_child(projectile)
-
-
 
 func pick_up() -> void:
 	is_pickedup = true
@@ -105,15 +89,6 @@ func pick_up() -> void:
 		timer.start()
 		timer.connect("timeout", Callable(self,"auto_shoot"))
 
-func drop() -> void:
-	is_pickedup = false
-
-func get_damage() -> float:
-	return damage
-	
-func set_damage(num:int) -> void:
-	damage = num
-	
 # DM Note: Timer triggered auto_shoot function with console logs for each weapon type
 func auto_shoot() -> void:
 	if is_pickedup:
@@ -125,3 +100,13 @@ func auto_shoot() -> void:
 				print("~chk-chk~ BANG")
 			"Rocket":
 				print("BOOM")
+
+func drop() -> void:
+	is_pickedup = false
+
+func get_damage() -> float:
+	return damage
+	
+func set_damage(num:int) -> void:
+	damage = num
+	
