@@ -1,14 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqtfijlj7vwni"]
+[gd_scene load_steps=7 format=3 uid="uid://cqtfijlj7vwni"]
 
 [ext_resource type="Script" uid="uid://1a81wjttwnhm" path="res://scripts/enemy.gd" id="1_4a83h"]
+[ext_resource type="Texture2D" uid="uid://bnhh6vf5r24ld" path="res://assets/enemy/GhostTex.png" id="2_40wdo"]
+[ext_resource type="ArrayMesh" uid="uid://gferg0ys3cxv" path="res://assets/enemy/Ghost.obj" id="3_tjssy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_883im"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_883im"]
-albedo_color = Color(0.640328, 0, 0.138643, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_4a83h"]
-material = SubResource("StandardMaterial3D_883im")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gl05p"]
+transparency = 1
+blend_mode = 1
+diffuse_mode = 2
+disable_ambient_light = true
+albedo_texture = ExtResource("2_40wdo")
+metallic_specular = 0.0
+metallic_texture_channel = 3
+emission_enabled = true
+emission = Color(0.266702, 0.484859, 1, 1)
+emission_energy_multiplier = 0.09
+disable_receive_shadows = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4a83h"]
 radius = 0.55
@@ -23,7 +32,11 @@ script = ExtResource("1_4a83h")
 shape = SubResource("CapsuleShape3D_883im")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RBCollision"]
-mesh = SubResource("CapsuleMesh_4a83h")
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.439753, 0)
+material_override = SubResource("StandardMaterial3D_gl05p")
+cast_shadow = 0
+mesh = ExtResource("3_tjssy")
+skeleton = NodePath("")
 
 [node name="HitBox" type="Area3D" parent="RBCollision"]
 collision_layer = 128
@@ -36,4 +49,8 @@ shape = SubResource("CapsuleShape3D_4a83h")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.4)
 
+[node name="ResetHitColor" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="area_entered" from="RBCollision/HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="timeout" from="ResetHitColor" to="." method="_on_reset_hit_color_timeout"]
