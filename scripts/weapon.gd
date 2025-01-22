@@ -41,6 +41,15 @@ func _ready() -> void:
 		_raycast = %RayCast
 		gun_barrel = _raycast
 
+func _physics_process(_delta: float) -> void:
+	if Input.is_action_pressed("manual_shoot") \
+	and is_projectile_weapon \
+	and can_shoot \
+	and is_pickedup:
+		shoot()
+		curr_cooldown = cooldown
+		can_shoot = false
+
 
 func _process(delta) -> void:
 	if (is_projectile_weapon):
@@ -57,6 +66,7 @@ func shoot() -> void:
 			projectile = projectile_scene.instantiate()
 			projectile.position = gun_barrel.global_position
 			projectile.transform.basis = gun_barrel.global_transform.basis
+			projectile.set_collision_layers(is_pickedup)
 			
 			# Randomly rotate each axis
 			var axis = Vector3(1, 0, 0)
@@ -74,17 +84,8 @@ func shoot() -> void:
 		projectile = projectile_scene.instantiate()
 		projectile.position = gun_barrel.global_position
 		projectile.transform.basis = gun_barrel.global_transform.basis
+		projectile.set_collision_layers(is_pickedup)
 		get_parent().add_child(projectile)
-
-
-func _physics_process(_delta: float) -> void:
-	if Input.is_action_pressed("manual_shoot") \
-	and is_projectile_weapon \
-	and can_shoot \
-	and is_pickedup:
-		shoot()
-		curr_cooldown = cooldown
-		can_shoot = false
 
 
 
@@ -110,7 +111,7 @@ func drop() -> void:
 func get_damage() -> float:
 	return damage
 	
-func set_damage(num) -> void:
+func set_damage(num:int) -> void:
 	damage = num
 	
 # DM Note: Timer triggered auto_shoot function with console logs for each weapon type

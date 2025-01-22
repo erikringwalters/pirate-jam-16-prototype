@@ -22,6 +22,8 @@ bottom_radius = 0.2
 height = 0.524
 
 [node name="Player" type="RigidBody3D"]
+collision_layer = 65
+collision_mask = 65
 physics_material_override = ExtResource("1_qhqgy")
 center_of_mass_mode = 1
 script = ExtResource("1_g2els")
