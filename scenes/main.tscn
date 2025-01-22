@@ -110,12 +110,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 2)
 
 [node name="Handgun_PickupItem" parent="." instance=ExtResource("7_jbj1t")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2, 1, 2)
+weapon_type = "Handgun"
 
 [node name="RocketLauncher_PickupItem" parent="." instance=ExtResource("8_muem4")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 4)
+weapon_type = "Rocket"
 
 [node name="Shotgun_PickupItem" parent="." instance=ExtResource("9_dp3eg")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 4, 1, 3)
+weapon_type = "Shotgun"
 
 [node name="Sword_PickupItem" parent="." instance=ExtResource("10_0ld40")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4, 1, 3)

@@ -3,6 +3,10 @@ extends Node3D
 @export var damage : float = 100.0
 @export var is_projectile_weapon : bool = false
 
+# DM Note: Couldn't figure out how to check which RigidBody3D model the weapon was using, so this was the next best thing I could think of.
+@export_category("Weapon Type")
+@export_enum("Handgun", "Rocket", "Shotgun") var weapon_type : String
+
 @export_category("Projectile Type")
 @export_enum("Bullet", "Rocket") var projectile_type : String 
 @export var cooldown : float = 0.8 
@@ -17,6 +21,12 @@ var can_shoot
 var gun_barrel
 var projectile_scene
 var projectile
+
+# Timers
+# DM Note: timer values subject to change
+var handgun_timer = 0.25
+var shotgun_timer = .7
+var rocket_timer = 1
 
 
 func _ready() -> void:
@@ -80,6 +90,19 @@ func _physics_process(_delta: float) -> void:
 
 func pick_up() -> void:
 	is_pickedup = true
+	# DM Note: On pickup, create and start an instanced timer for the newly attached weapon
+	if(weapon_type):
+		var timer = Timer.new()
+		match weapon_type:
+			"Handgun":
+				timer.wait_time = handgun_timer
+			"Shotgun":
+				timer.wait_time = shotgun_timer
+			"Rocket":
+				timer.wait_time = rocket_timer
+		add_child(timer)
+		timer.start()
+		timer.connect("timeout", Callable(self,"auto_shoot"))
 
 func drop() -> void:
 	is_pickedup = false
@@ -90,3 +113,14 @@ func get_damage() -> float:
 func set_damage(num) -> void:
 	damage = num
 	
+# DM Note: Timer triggered auto_shoot function with console logs for each weapon type
+func auto_shoot() -> void:
+	if is_pickedup:
+		shoot()
+		match weapon_type:
+			"Handgun":
+				print("Bang")
+			"Shotgun":
+				print("~chk-chk~ BANG")
+			"Rocket":
+				print("BOOM")
