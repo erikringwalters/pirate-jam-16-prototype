@@ -1,6 +1,6 @@
-extends Node3D
+extends Area3D
 
-const SPEED : float = 40.0
+const SPEED : float = 20.0
 
 @onready var mesh :MeshInstance3D = $MeshInstance3D
 @onready var ray : RayCast3D = $RayCast3D
@@ -15,3 +15,11 @@ func _physics_process(delta):
 # Despawn the bullet after some time
 func _on_life_timeout() -> void:
 	queue_free()
+
+func set_collision_layers(is_pickedup:bool) -> void:
+	if is_pickedup:
+		set_collision_layer_value(CollisionLayers.ENEMY_DAMAGE, true)
+		set_collision_layer_value(CollisionLayers.PLAYER_DAMAGE, false)
+	else:
+		set_collision_layer_value(CollisionLayers.PLAYER_DAMAGE, true)
+		set_collision_layer_value(CollisionLayers.ENEMY_DAMAGE, false)

@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://btjmhtr33y0co"]
+[gd_scene load_steps=6 format=3 uid="uid://btjmhtr33y0co"]
 
 [ext_resource type="Script" uid="uid://bf2dlwf4sjkbx" path="res://scripts/bullet.gd" id="1_jasnq"]
 [ext_resource type="PackedScene" uid="uid://uwuuw6ruyk8a" path="res://assets/weapons/Rocket_Projectile.fbx" id="2_hxjf7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hxjf7"]
+size = Vector3(0.25, 1.5, 0.25)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mgj1w"]
 size = Vector3(0.1, 0.5, 0.1)
@@ -12,8 +15,11 @@ emission_enabled = true
 emission = Color(1, 0.424206, 0.0779518, 1)
 emission_energy_multiplier = 5.0
 
-[node name="Bullet" type="Node3D"]
+[node name="Bullet" type="Area3D"]
 script = ExtResource("1_jasnq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_hxjf7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438001, 0)

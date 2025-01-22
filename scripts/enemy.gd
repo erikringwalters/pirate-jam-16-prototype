@@ -29,3 +29,6 @@ func _physics_process(delta: float) -> void:
 
 func get_angle(a:Vector3, b:Vector3) -> float:
 	return -atan2((b.z - a.z), (b.x - a.x))
+
+func _on_hit_box_area_entered(area: Area3D) -> void:
+	print("ouch", area, "hit me")
