@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqtfijlj7vwni"]
+[gd_scene load_steps=7 format=3 uid="uid://cqtfijlj7vwni"]
 
 [ext_resource type="Script" uid="uid://1a81wjttwnhm" path="res://scripts/enemy.gd" id="1_4a83h"]
+[ext_resource type="Script" path="res://scenes/enemy/hit_box.gd" id="2_a3pup"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_883im"]
 
@@ -26,6 +27,7 @@ shape = SubResource("CapsuleShape3D_883im")
 mesh = SubResource("CapsuleMesh_4a83h")
 
 [node name="HitBox" type="Area3D" parent="RBCollision"]
+script = ExtResource("2_a3pup")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RBCollision/HitBox"]
 shape = SubResource("CapsuleShape3D_4a83h")

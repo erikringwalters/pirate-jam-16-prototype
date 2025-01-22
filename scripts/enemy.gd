@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 		global_transform.origin, 
 		get_parent().get_node("Player").global_transform.origin
 	)
-	global_rotation.y = look_direction - deg_to_rad(90)
+	global_rotation.y = lerp(global_rotation.y, look_direction, 0.1)
 	
 	# Move toward player
 	var move_direction := global_basis.z
