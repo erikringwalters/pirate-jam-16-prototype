@@ -6,9 +6,8 @@ extends RigidBody3D
 
 @onready var _weapon_marker = %WeaponMarker
 
-
 func _ready() -> void:
-	var weapon = Items.weapons["Sword"].instantiate()
+	var weapon = Items.weapons["Sword"]["weapon_instance"].instantiate()
 	add_child(weapon)
 	weapon.global_transform.origin = _weapon_marker.global_transform.origin
 	
@@ -44,10 +43,10 @@ func process_damage(dmg):
 		queue_free()
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
-	print("ouch", area, "hit me")
-	# only works for bullets
-	if area.has_method("get_damage"):
-		process_damage(area.get_damage())
+	if area.has_method("projectile_damage"):
+		process_damage(area.projectile_damage())
+	elif area.has_method("melee_damage"):
+		process_damage(area.melee_damage())
 	
 	
 	
