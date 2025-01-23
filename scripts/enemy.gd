@@ -10,7 +10,7 @@ var weapon_name:NodePath
 
 func _ready() -> void:
 	weapon_name = "Sword"
-	var weapon = Items.weapons[str(weapon_name)].instantiate()
+	var weapon = Items.weapons[str(weapon_name)]['weapon_scene'].instantiate()
 	add_child(weapon)
 	weapon.set_collision_layers(true, false)
 	weapon.freeze = true

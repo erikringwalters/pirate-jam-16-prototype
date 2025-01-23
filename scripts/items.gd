@@ -4,7 +4,7 @@ extends Node
 @onready var weapons : Dictionary = {
 	"Dagger" : {
 		"path":"res://assets/weapons/Dagger.fbx",
-		"weapon_instance": ResourceLoader.load("res://assets/weapons/Dagger.fbx"),
+		"weapon_scene": ResourceLoader.load("res://scenes/weapons/dagger.tscn"),
 		"base_damage": 100.0,
 		"damage_mult": 1.0,
 		"base_cooldown": 0.25,
@@ -13,7 +13,7 @@ extends Node
 	}, 
 	"Sword" : {
 		"path":"res://assets/weapons/Sword.fbx",
-		"weapon_instance": ResourceLoader.load("res://assets/weapons/Sword.fbx"),
+		"weapon_scene": ResourceLoader.load("res://scenes/weapons/sword.tscn"),
 		"base_damage": 100.0,
 		"damage_mult": 1.0,
 		"base_cooldown": 0.25,
@@ -22,7 +22,7 @@ extends Node
 	}, 
 	"Handgun" : {
 		"path":"res://assets/weapons/Handgun.fbx",
-		"weapon_instance": ResourceLoader.load("res://assets/weapons/Handgun.fbx"),
+		"weapon_scene": ResourceLoader.load("res://scenes/weapons/handgun.tscn"),
 		"base_damage": 100.0,
 		"damage_mult": 1.0,
 		"base_cooldown": 0.25,
@@ -31,7 +31,7 @@ extends Node
 	}, 
 	"Shotgun" : {
 		"path":"res://assets/weapons/Shotgun.fbx",
-		"weapon_instance": ResourceLoader.load("res://assets/weapons/Shotgun.fbx"),
+		"weapon_scene": ResourceLoader.load("res://scenes/weapons/shotgun.tscn"),
 		"base_damage": 100.0,
 		"damage_mult": 1.0,
 		"base_cooldown": 0.25,
@@ -40,7 +40,7 @@ extends Node
 	}, 
 	"Rocket" : {
 		"path":"res://assets/weapons/Rocket.fbx",
-		"weapon_instance": ResourceLoader.load("res://assets/weapons/Rocket.fbx"),
+		"weapon_scene": ResourceLoader.load("res://scenes/weapons/rocket.tscn"),
 		"base_damage": 100.0,
 		"damage_mult": 1.0,
 		"base_cooldown": 0.25,
