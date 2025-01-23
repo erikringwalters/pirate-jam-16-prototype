@@ -8,7 +8,6 @@ extends RigidBody3D
 
 var weapon_name:NodePath
 
-
 func _ready() -> void:
 	weapon_name = "Sword"
 	var weapon = Items.weapons[str(weapon_name)].instantiate()
@@ -52,11 +51,11 @@ func process_damage(dmg):
 		queue_free()
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
-	print("ouch ", area, " hit me")
-	# only works for bullets
-	if area.has_method("get_damage"):
-		process_damage(area.get_damage())
-	
+	if area.has_method("projectile_damage"):
+		process_damage(area.projectile_damage())
+	elif area.has_method("melee_damage"):
+		process_damage(area.melee_damage())
+
 func drop_weapon() -> void:
 	var weapon = get_node(weapon_name)
 	weapon.reparent(get_parent(), true)

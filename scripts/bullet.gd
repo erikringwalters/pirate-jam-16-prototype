@@ -21,8 +21,9 @@ func set_collision_layers(is_held_by_player:bool) -> void:
 	set_collision_layer_value(CollisionLayers.ENEMY_DAMAGE, is_held_by_player)
 	set_collision_layer_value(CollisionLayers.PLAYER_DAMAGE, !is_held_by_player)
 
-func get_damage():
+func projectile_damage():
 	return damage
 	
 func set_damage(dmg):
+	print('setting damage to:', dmg)
 	damage = dmg

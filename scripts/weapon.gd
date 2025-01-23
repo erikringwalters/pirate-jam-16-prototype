@@ -5,7 +5,7 @@ extends RigidBody3D
 
 # DM Note: Couldn't figure out how to check which RigidBody3D model the weapon was using, so this was the next best thing I could think of.
 @export_category("Weapon Type")
-@export_enum("Handgun", "Rocket", "Shotgun") var weapon_type : String
+@export_enum("Handgun", "Rocket", "Shotgun", "Sword", "Dagger") var weapon_type : String
 
 @export_category("Projectile Type")
 @export_enum("Bullet", "Rocket") var projectile_type : String 
@@ -15,17 +15,9 @@ extends RigidBody3D
 var _raycast:RayCast3D
 
 # Conditional projectile weapon variables, will remain null if not projectile
-var can_shoot
 var gun_barrel
 var projectile_scene
 var projectile
-
-# Timers
-# DM Note: timer values subject to change
-var handgun_timer = 0.25
-var shotgun_timer = .7
-var rocket_timer = 1
-
 
 func _ready() -> void:
 	if (projectile_type and projectile_type != ''):
@@ -33,27 +25,9 @@ func _ready() -> void:
 	else: # Default if no projectile type is selected
 		projectile_scene = Items.projectiles['Bullet']
 	if (is_projectile_weapon):
-		can_shoot = true
+		#can_shoot = true
 		_raycast = %RayCast
 		gun_barrel = _raycast
-
-func initialize() -> void:
-	if (projectile_type and projectile_type != ''):
-		projectile_scene = Items.projectiles[projectile_type]
-	else: # Default if no projectile type is selected
-		projectile_scene = Items.projectiles['Bullet']
-	if (is_projectile_weapon):
-		can_shoot = true
-		_raycast = %RayCast
-		gun_barrel = _raycast
-
-func _physics_process(_delta: float) -> void:
-	if Input.is_action_pressed("manual_shoot") \
-	and is_projectile_weapon \
-	and can_shoot \
-	and is_pickedup:
-		shoot()
-		can_shoot = false
 
 func shoot() -> void:
 	if (scatter_shot):
@@ -62,8 +36,8 @@ func shoot() -> void:
 			projectile = projectile_scene.instantiate()
 			projectile.position = gun_barrel.global_position
 			projectile.transform.basis = gun_barrel.global_transform.basis
-			projectile.set_damage(damage)
-			projectile.set_collision_layers(is_pickedup)
+			projectile.set_damage(Items.weapons['weapon_type']['base_damage'])
+			projectile.set_collision_layers(is_pickedup)		
 			# Randomly rotate each axis
 			var axis = Vector3(1, 0, 0)
 			var rotation_amount = float((randi() % 180) - 90)/1000
@@ -79,7 +53,7 @@ func shoot() -> void:
 		projectile = projectile_scene.instantiate()
 		projectile.position = gun_barrel.global_position
 		projectile.transform.basis = gun_barrel.global_transform.basis
-		projectile.set_damage(damage)
+		projectile.set_damage(Items.weapons[weapon_type]['base_damage'])
 		projectile.set_collision_layers(is_pickedup)
 		get_parent().add_child(projectile)
 
@@ -89,13 +63,7 @@ func pick_up() -> void:
 	# DM Note: On pickup, create and start an instanced timer for the newly attached weapon
 	if(weapon_type):
 		var timer = Timer.new()
-		match weapon_type:
-			"Handgun":
-				timer.wait_time = handgun_timer
-			"Shotgun":
-				timer.wait_time = shotgun_timer
-			"Rocket":
-				timer.wait_time = rocket_timer
+		timer.wait_time = Items.weapons[weapon_type]['base_cooldown']
 		add_child(timer)
 		timer.start()
 		timer.connect("timeout", Callable(self,"auto_shoot"))
@@ -104,13 +72,9 @@ func pick_up() -> void:
 func auto_shoot() -> void:
 	if is_pickedup:
 		shoot()
-		match weapon_type:
-			"Handgun":
-				print("Bang")
-			"Shotgun":
-				print("~chk-chk~ BANG")
-			"Rocket":
-				print("BOOM")
+
+func melee_damage():
+	return Items.weapons[weapon_type]['base_damage']
 
 func drop() -> void:
 	is_pickedup = false
