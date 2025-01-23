@@ -2,10 +2,10 @@ extends Area3D
 
 const SPEED : float = 20.0
 var damage : float = 100.0
+var type : String
 
 @onready var mesh :MeshInstance3D = $MeshInstance3D
 @onready var ray : RayCast3D = $RayCast3D
-
 
 func _ready():
 	$Life.start()
@@ -25,5 +25,7 @@ func projectile_damage():
 	return damage
 	
 func set_damage(dmg):
-	print('setting damage to:', dmg)
 	damage = dmg
+	
+func set_type(t):
+	type = t

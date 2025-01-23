@@ -43,7 +43,7 @@ extends Node
 		"weapon_scene": ResourceLoader.load("res://scenes/weapons/rocket.tscn"),
 		"base_damage": 100.0,
 		"damage_mult": 1.0,
-		"base_cooldown": 0.25,
+		"base_cooldown": 2.0,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
 	}
@@ -53,6 +53,8 @@ extends Node
 	"Bullet" : ResourceLoader.load("res://scenes/weapons/bullet.tscn"),
 	"Rocket" : ResourceLoader.load("res://scenes/weapons/rocket_projectile.tscn"),
 }
+
+@onready var explosion = ResourceLoader.load("res://scenes/weapons/explosion.tscn")
 
 func _ready() -> void:
 	pass

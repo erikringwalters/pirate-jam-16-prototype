@@ -53,6 +53,11 @@ func process_damage(dmg):
 func _on_hit_box_area_entered(area: Area3D) -> void:
 	if area.has_method("projectile_damage"):
 		process_damage(area.projectile_damage())
+		if (area.type=="Rocket" or area.type=="rocket"):
+			var expl = Items.explosion.instantiate()
+			add_child(expl)
+			expl.global_transform.origin = area.global_transform.origin
+		area.queue_free()
 	elif area.has_method("melee_damage"):
 		process_damage(area.melee_damage())
 

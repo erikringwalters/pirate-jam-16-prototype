@@ -36,7 +36,8 @@ func shoot() -> void:
 			projectile = projectile_scene.instantiate()
 			projectile.position = gun_barrel.global_position
 			projectile.transform.basis = gun_barrel.global_transform.basis
-			projectile.set_damage(Items.weapons['weapon_type']['base_damage'])
+			projectile.set_type(projectile_type)
+			projectile.set_damage(Items.weapons[weapon_type]['base_damage'])
 			projectile.set_collision_layers(is_pickedup)		
 			# Randomly rotate each axis
 			var axis = Vector3(1, 0, 0)
@@ -53,6 +54,7 @@ func shoot() -> void:
 		projectile = projectile_scene.instantiate()
 		projectile.position = gun_barrel.global_position
 		projectile.transform.basis = gun_barrel.global_transform.basis
+		projectile.set_type(projectile_type)
 		projectile.set_damage(Items.weapons[weapon_type]['base_damage'])
 		projectile.set_collision_layers(is_pickedup)
 		get_parent().add_child(projectile)
@@ -92,3 +94,6 @@ func set_collision_layers(is_held_by_enemy:bool, is_held_by_player:bool) -> void
 	set_collision_layer_value(CollisionLayers.PICKUP,
 		!is_held_by_enemy && !is_held_by_player
 	)
+	
+
+# get_collision_layer_value(CollisionLayers.ENEMY_DAMAGE) -> bullet.set
