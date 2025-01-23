@@ -17,13 +17,9 @@ func _physics_process(delta):
 func _on_life_timeout() -> void:
 	queue_free()
 
-func set_collision_layers(is_pickedup:bool) -> void:
-	if is_pickedup:
-		set_collision_layer_value(CollisionLayers.ENEMY_DAMAGE, true)
-		set_collision_layer_value(CollisionLayers.PLAYER_DAMAGE, false)
-	else:
-		set_collision_layer_value(CollisionLayers.PLAYER_DAMAGE, true)
-		set_collision_layer_value(CollisionLayers.ENEMY_DAMAGE, false)
+func set_collision_layers(is_held_by_player:bool) -> void:
+	set_collision_layer_value(CollisionLayers.ENEMY_DAMAGE, is_held_by_player)
+	set_collision_layer_value(CollisionLayers.PLAYER_DAMAGE, !is_held_by_player)
 
 func projectile_damage():
 	return damage

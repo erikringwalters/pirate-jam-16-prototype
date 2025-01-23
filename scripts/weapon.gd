@@ -1,4 +1,4 @@
-extends Node3D
+extends RigidBody3D
 
 @export var damage : float = 100.0
 @export var is_projectile_weapon : bool = false
@@ -59,6 +59,7 @@ func shoot() -> void:
 
 func pick_up() -> void:
 	is_pickedup = true
+	set_collision_layers(false, true)
 	# DM Note: On pickup, create and start an instanced timer for the newly attached weapon
 	if(weapon_type):
 		var timer = Timer.new()
@@ -83,4 +84,11 @@ func get_damage() -> float:
 	
 func set_damage(num:int) -> void:
 	damage = num
-	
+
+func set_collision_layers(is_held_by_enemy:bool, is_held_by_player:bool) -> void:
+	set_collision_layer_value(CollisionLayers.COMMON, !is_held_by_enemy)
+	set_collision_layer_value(CollisionLayers.PLAYER_DAMAGE, is_held_by_enemy)
+	set_collision_layer_value(CollisionLayers.ENEMY_DAMAGE, is_held_by_player)
+	set_collision_layer_value(CollisionLayers.PICKUP,
+		!is_held_by_enemy && !is_held_by_player
+	)
