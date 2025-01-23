@@ -6,10 +6,17 @@ extends RigidBody3D
 
 @onready var _weapon_marker = %WeaponMarker
 
+var weapon_name:NodePath
+
 
 func _ready() -> void:
-	var weapon = Items.weapons["Sword"].instantiate()
+	weapon_name = "Sword"
+	var weapon = Items.weapons[str(weapon_name)].instantiate()
 	add_child(weapon)
+	weapon.set_collision_layers(true, false)
+	weapon.freeze = true
+	weapon.name = weapon_name
+	weapon.rotation.y += deg_to_rad(180)
 	weapon.global_transform.origin = _weapon_marker.global_transform.origin
 	
 func _physics_process(delta: float) -> void:
@@ -41,15 +48,20 @@ func process_damage(dmg):
 	max_health -= dmg
 	if (max_health <= 0): #dedge
 		# maybe make it explode here or something
+		drop_weapon()
 		queue_free()
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
-	print("ouch", area, "hit me")
+	print("ouch ", area, " hit me")
 	# only works for bullets
 	if area.has_method("get_damage"):
 		process_damage(area.get_damage())
 	
-	
-	
+func drop_weapon() -> void:
+	var weapon = get_node(weapon_name)
+	weapon.reparent(get_parent(), true)
+	weapon.set_collision_layers(false, false)
+	weapon.freeze = false
+	print(weapon)
 	
 	

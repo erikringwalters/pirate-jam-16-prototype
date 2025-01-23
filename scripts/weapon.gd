@@ -1,4 +1,4 @@
-extends Node3D
+extends RigidBody3D
 
 @export var damage : float = 100.0
 @export var is_projectile_weapon : bool = false
@@ -37,6 +37,16 @@ func _ready() -> void:
 		_raycast = %RayCast
 		gun_barrel = _raycast
 
+func initialize() -> void:
+	if (projectile_type and projectile_type != ''):
+		projectile_scene = Items.projectiles[projectile_type]
+	else: # Default if no projectile type is selected
+		projectile_scene = Items.projectiles['Bullet']
+	if (is_projectile_weapon):
+		can_shoot = true
+		_raycast = %RayCast
+		gun_barrel = _raycast
+
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("manual_shoot") \
 	and is_projectile_weapon \
@@ -53,7 +63,7 @@ func shoot() -> void:
 			projectile.position = gun_barrel.global_position
 			projectile.transform.basis = gun_barrel.global_transform.basis
 			projectile.set_damage(damage)
-			projectile.set_collision_layers(is_pickedup)		
+			projectile.set_collision_layers(is_pickedup)
 			# Randomly rotate each axis
 			var axis = Vector3(1, 0, 0)
 			var rotation_amount = float((randi() % 180) - 90)/1000
@@ -75,6 +85,7 @@ func shoot() -> void:
 
 func pick_up() -> void:
 	is_pickedup = true
+	set_collision_layers(false, true)
 	# DM Note: On pickup, create and start an instanced timer for the newly attached weapon
 	if(weapon_type):
 		var timer = Timer.new()
@@ -109,4 +120,11 @@ func get_damage() -> float:
 	
 func set_damage(num:int) -> void:
 	damage = num
-	
+
+func set_collision_layers(is_held_by_enemy:bool, is_held_by_player:bool) -> void:
+	set_collision_layer_value(CollisionLayers.COMMON, !is_held_by_enemy)
+	set_collision_layer_value(CollisionLayers.PLAYER_DAMAGE, is_held_by_enemy)
+	set_collision_layer_value(CollisionLayers.ENEMY_DAMAGE, is_held_by_player)
+	set_collision_layer_value(CollisionLayers.PICKUP,
+		!is_held_by_enemy && !is_held_by_player
+	)

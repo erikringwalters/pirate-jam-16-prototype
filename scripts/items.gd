@@ -15,4 +15,4 @@ var weapons : Dictionary = {
 
 func _ready() -> void:
 	for weapon in weapons.keys():
-		weapons[weapon] = ResourceLoader.load("res://assets/weapons/" + weapon + ".fbx")
+		weapons[weapon] = ResourceLoader.load("res://scenes/weapons/" + weapon.to_lower() + ".tscn")
