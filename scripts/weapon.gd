@@ -29,6 +29,15 @@ func _ready() -> void:
 		_raycast = %RayCast
 		gun_barrel = _raycast
 
+func add_child_logic(projectile) -> void:
+	# Currently, when an enemy spawns with a projectile weapon, the `get_parent()` returns
+	#	the enemy, making the projectile continuously follows the rotation of the enemy. So 
+	#	instead we need to go a level higher to assign the world as the parent
+	if ('Main' in String(get_parent().name)):
+		get_parent().add_child(projectile)
+	else: 
+		get_parent().get_parent().add_child(projectile)
+		
 func shoot() -> void:
 	if (scatter_shot):
 		# Spawn ten bullets
@@ -36,8 +45,9 @@ func shoot() -> void:
 			projectile = projectile_scene.instantiate()
 			projectile.position = gun_barrel.global_position
 			projectile.transform.basis = gun_barrel.global_transform.basis
+			projectile.set_type(projectile_type)
 			projectile.set_damage(Items.weapons[weapon_type]['base_damage'])
-			projectile.set_collision_layers(is_pickedup)
+			projectile.set_collision_layers(is_pickedup and get_collision_layer_value(CollisionLayers.ENEMY_DAMAGE))
 			# Randomly rotate each axis
 			var axis = Vector3(1, 0, 0)
 			var rotation_amount = float((randi() % 180) - 90)/1000
@@ -47,26 +57,37 @@ func shoot() -> void:
 			projectile.transform.basis = projectile.transform.basis.rotated(axis, rotation_amount)
 			axis = Vector3(0, 0, 1)
 			rotation_amount = float((randi() % 180) - 90)/1000
-			projectile.transform.basis = projectile.transform.basis.rotated(axis, rotation_amount)		
-			get_parent().add_child(projectile)
+			projectile.transform.basis = projectile.transform.basis.rotated(axis, rotation_amount)	
+			add_child_logic(projectile)	
 	else:
 		projectile = projectile_scene.instantiate()
 		projectile.position = gun_barrel.global_position
 		projectile.transform.basis = gun_barrel.global_transform.basis
+		projectile.set_type(projectile_type)
 		projectile.set_damage(Items.weapons[weapon_type]['base_damage'])
-		projectile.set_collision_layers(is_pickedup)
-		get_parent().add_child(projectile)
+		projectile.set_collision_layers(is_pickedup and get_collision_layer_value(CollisionLayers.ENEMY_DAMAGE))
+		print(get_collision_layer_value(CollisionLayers.PLAYER_DAMAGE))
+		add_child_logic(projectile)
 
-func pick_up() -> void:
-	is_pickedup = true
-	set_collision_layers(false, true)
-	# DM Note: On pickup, create and start an instanced timer for the newly attached weapon
+func start_shot_timer() -> void:
 	if(weapon_type):
 		var timer = Timer.new()
 		timer.wait_time = Items.weapons[weapon_type]['base_cooldown']
 		add_child(timer)
 		timer.start()
 		timer.connect("timeout", Callable(self,"auto_shoot"))
+
+func enemy_pick_up() -> void:
+	print('enemy pickup')
+	is_pickedup = true
+	set_collision_layers(true, false)
+	start_shot_timer()
+	
+func pick_up() -> void:
+	print('player pickup')
+	is_pickedup = true
+	set_collision_layers(false, true)
+	start_shot_timer()
 
 # DM Note: Timer triggered auto_shoot function with console logs for each weapon type
 func auto_shoot() -> void:
@@ -92,3 +113,6 @@ func set_collision_layers(is_held_by_enemy:bool, is_held_by_player:bool) -> void
 	set_collision_layer_value(CollisionLayers.PICKUP,
 		!is_held_by_enemy && !is_held_by_player
 	)
+	
+func set_weapon_type(type):
+	weapon_type = type

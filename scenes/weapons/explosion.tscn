@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhlbubobgko7c"]
+
+[ext_resource type="Script" uid="uid://b5dlccxh4nuh8" path="res://scripts/explosion.gd" id="1_nmdyk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_llixc"]
+radius = 2.847
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmdyk"]
+albedo_color = Color(0.696164, 0.678753, 0, 1)
+emission_enabled = true
+emission = Color(0.68276, 0.635471, 0.372632, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4u5ba"]
+material = SubResource("StandardMaterial3D_nmdyk")
+
+[node name="Explosion" type="Area3D"]
+collision_layer = 16777215
+collision_mask = 16777215
+script = ExtResource("1_nmdyk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_llixc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_4u5ba")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

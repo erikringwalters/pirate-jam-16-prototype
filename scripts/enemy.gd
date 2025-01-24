@@ -10,17 +10,17 @@ var weapon_name:NodePath
 var weapon:Node3D
 
 func _ready() -> void:
-	weapon_name = "Handgun"
+	weapon_name = "Rocket"
 	weapon = Items.weapons[str(weapon_name)]['weapon_scene'].instantiate()
 	add_child(weapon)
-	weapon.set_collision_layers(true, false)
-	weapon.set_deferred("freeze", true)
-	weapon.rotation.y += deg_to_rad(180)
+	weapon.set_weapon_type(weapon_name)
+	weapon.enemy_pick_up()
 	weapon.global_transform.origin = _weapon_marker.global_transform.origin
+	weapon.rotation.y += deg_to_rad(180)
+	weapon.set_deferred("freeze", true)
 	#get_node("RBCollision/MeshInstance3D").surface_material_override(0.resource_local_to_scene = true)
 	
 func _physics_process(delta: float) -> void:
-	# Look at player # TODO: Slowly look toward player to give player a chance to avoid/kite
 	var look_direction = get_angle(
 		global_transform.origin, 
 		get_parent().get_node("Player").global_transform.origin
@@ -38,9 +38,12 @@ func _physics_process(delta: float) -> void:
 func get_angle(a:Vector3, b:Vector3) -> float:
 	return -atan2((b.z - a.z), (b.x - a.x))
 
-func _on_reset_hit_color_timeout() -> void:
+func reset_material_color() -> void:
 	$RBCollision/MeshInstance3D.material_override.emission = Color(0.2667, 0.4849, 1.0)
-	$RBCollision/MeshInstance3D.material_override.emission_energy_multiplier = 0.09
+	$RBCollision/MeshInstance3D.material_override.emission_energy_multiplier = 0.01
+
+func _on_reset_hit_color_timeout() -> void:
+	reset_material_color()
 
 func process_damage(dmg):
 	$RBCollision/MeshInstance3D.material_override.emission = Color(100, 0 ,0)
@@ -49,15 +52,22 @@ func process_damage(dmg):
 	if (max_health <= 0): #dedge
 		# maybe make it explode here or something
 		drop_weapon()
+		reset_material_color()
 		queue_free()
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
 	if area.has_method("projectile_damage"):
 		process_damage(area.projectile_damage())
+		if (area.type=="Rocket" or area.type=="rocket"):
+			var expl = Items.explosion.instantiate()
+			get_parent().add_child(expl)
+			expl.global_transform.origin = area.global_transform.origin
+		area.queue_free()
 	elif area.has_method("melee_damage"):
 		process_damage(area.melee_damage())
 
 func drop_weapon() -> void:
+	weapon.drop()
 	weapon.reparent(get_parent(), true)
 	weapon.set_collision_layers(false, false)
 	weapon.set_deferred("freeze", false)
