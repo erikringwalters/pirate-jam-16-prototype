@@ -7,16 +7,17 @@ extends RigidBody3D
 @onready var _weapon_marker = %WeaponMarker
 
 var weapon_name:NodePath
+var weapon:Node3D
 
 func _ready() -> void:
-	weapon_name = "Sword"
-	var weapon = Items.weapons[str(weapon_name)]['weapon_scene'].instantiate()
+	weapon_name = "Handgun"
+	weapon = Items.weapons[str(weapon_name)]['weapon_scene'].instantiate()
 	add_child(weapon)
 	weapon.set_collision_layers(true, false)
-	weapon.freeze = true
-	weapon.name = weapon_name
+	weapon.set_deferred("freeze", true)
 	weapon.rotation.y += deg_to_rad(180)
 	weapon.global_transform.origin = _weapon_marker.global_transform.origin
+	#get_node("RBCollision/MeshInstance3D").surface_material_override(0.resource_local_to_scene = true)
 	
 func _physics_process(delta: float) -> void:
 	# Look at player # TODO: Slowly look toward player to give player a chance to avoid/kite
@@ -57,10 +58,9 @@ func _on_hit_box_area_entered(area: Area3D) -> void:
 		process_damage(area.melee_damage())
 
 func drop_weapon() -> void:
-	var weapon = get_node(weapon_name)
 	weapon.reparent(get_parent(), true)
 	weapon.set_collision_layers(false, false)
-	weapon.freeze = false
+	weapon.set_deferred("freeze", false)
 	print(weapon)
 	
 	

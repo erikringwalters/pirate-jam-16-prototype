@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://ct0tti2mfck6l"]
+[gd_scene load_steps=16 format=3 uid="uid://ct0tti2mfck6l"]
 
 [ext_resource type="PackedScene" uid="uid://bwge4babpy161" path="res://scenes/player/player.tscn" id="1_choun"]
 [ext_resource type="Script" uid="uid://bncu4llldqjrd" path="res://scripts/main.gd" id="1_ya4ey"]
 [ext_resource type="PhysicsMaterial" uid="uid://baifveh640c1m" path="res://materials/physics_friction.tres" id="2_ya4ey"]
 [ext_resource type="Shader" uid="uid://cyolrnj113mxo" path="res://shaders/floor.gdshader" id="3_eb6dy"]
+[ext_resource type="Script" uid="uid://dhjhidvuhk8dv" path="res://scripts/spawner.gd" id="3_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://dnab25acrgyoy" path="res://scenes/weapons/dagger.tscn" id="6_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://ch5f82om4wwn7" path="res://scenes/weapons/handgun.tscn" id="7_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://hjn3ta46v6nr" path="res://scenes/weapons/rocket.tscn" id="8_muem4"]
@@ -53,12 +54,16 @@ size = Vector3(100, 1, 100)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ya4ey")
+enemy_scene = ExtResource("11_ya4ey")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h2yge")
 
 [node name="Player" parent="." instance=ExtResource("1_choun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Spawner" type="Node3D" parent="."]
+script = ExtResource("3_ya4ey")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
