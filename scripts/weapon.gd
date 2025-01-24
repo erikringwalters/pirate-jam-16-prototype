@@ -12,6 +12,7 @@ extends RigidBody3D
 @export var scatter_shot : bool = false
 
 @onready var is_pickedup = false
+@onready var hit_box = $"RBCollision/HitBox"
 var _raycast:RayCast3D
 
 # Conditional projectile weapon variables, will remain null if not projectile
@@ -29,14 +30,14 @@ func _ready() -> void:
 		_raycast = %RayCast
 		gun_barrel = _raycast
 
-func add_child_logic(projectile) -> void:
+func add_child_logic(_projectile) -> void:
 	# Currently, when an enemy spawns with a projectile weapon, the `get_parent()` returns
 	#	the enemy, making the projectile continuously follows the rotation of the enemy. So 
 	#	instead we need to go a level higher to assign the world as the parent
 	if ('Main' in String(get_parent().name)):
-		get_parent().add_child(projectile)
+		get_parent().add_child(_projectile)
 	else: 
-		get_parent().get_parent().add_child(projectile)
+		get_parent().get_parent().add_child(_projectile)
 		
 func shoot() -> void:
 	if (scatter_shot):

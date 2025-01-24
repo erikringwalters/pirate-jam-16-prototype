@@ -55,6 +55,7 @@ size = Vector3(100, 1, 100)
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ya4ey")
 enemy_scene = ExtResource("11_ya4ey")
+weapon_scene = ExtResource("9_dp3eg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h2yge")

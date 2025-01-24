@@ -7,7 +7,7 @@ var explosion_force : int = 10
 func _ready() -> void:
 	$Lifetime.start()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	const rate = 1.1
 	get_node('MeshInstance3D').mesh.radius *= rate
 	get_node('MeshInstance3D').mesh.height = get_node('MeshInstance3D').mesh.radius*2
@@ -31,7 +31,7 @@ func _on_body_exited(body: Node3D) -> void:
 
 func explosion():
 	var force_dir : Vector3
-	var random_vector : Vector3
+	#var random_vector : Vector3
 	#Applying the explosion force for every Rigidbody in the array.
 	for j in items_in_radius:
 		#Getting a direction vector between the bomb and all nearby RigidBodies. This line of code later helps to calculate a trajectory    for the Rigidbodies.
@@ -39,7 +39,7 @@ func explosion():
 		#Make it go up because otherwise it is shoved into the ground
 		force_dir += Vector3(0.0,2.0,0.0)
 		#Generating a position on the object where the force will be applied. This line of code makes the Rigidbodies randomly rotate after the explosion.
-		random_vector = Vector3(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)) * force_dir
+		#random_vector = Vector3(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)) * force_dir
 		#j.apply_impulse(random_vector, force_dir * explosion_force)
 		# can also probably be this if we don't want spin:
 		j.apply_impulse(force_dir * explosion_force, force_dir)
