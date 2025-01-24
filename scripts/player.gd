@@ -15,6 +15,8 @@ var _camera_input_direction := Vector2.ZERO
 @onready var _camera_pivot:Node3D = %CameraPivot
 @onready var _camera:Camera3D = %Camera
 
+var _name = 'player'
+
 func _ready() -> void:
 	%CameraPivot.top_level = true
 
@@ -73,7 +75,6 @@ func _physics_process(delta: float) -> void:
 	angular_velocity.z = clamp(vel.z, -move_speed, move_speed)
 
 func _on_pickup_body_entered(body: Node3D) -> void:
-	print(body)
 	if(body.is_in_group("Pickup")):
 		body.get_node("RBCollision").reparent(self, true)
 		body.set_deferred("freeze", true)
