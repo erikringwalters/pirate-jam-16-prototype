@@ -39,3 +39,5 @@ shape = SubResource("BoxShape3D_58ehi")
 
 [node name="Anchor" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1, 4.37114e-08)
+
+[connection signal="body_entered" from="RBCollision/HitBox" to="." method="_on_hit_box_body_entered"]
