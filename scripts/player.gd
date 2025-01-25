@@ -79,6 +79,7 @@ func _on_pickup_body_entered(body: Node3D) -> void:
 		collision.reparent(self, true)
 		collision.get_node("HitBox").connect("body_entered", Callable(self, "_on_pickup_body_entered"))
 		collision.get_node("HitBox").connect("area_entered", Callable(self, "_on_pickup_area_entered"))
+		body.set_deferred("disabled", false)
 		body.set_deferred("freeze", true)
 		body.pick_up()
 
@@ -93,4 +94,6 @@ func take_hit(area:Node3D):
 		print("ouch player's hit")
 		health -= area.projectile_damage() if area.has_method("projectile_damage") else 0
 		print("player health: ", health)
-		area.queue_free()
+		#area.queue_free()
+	elif area.is_in_group("Melee"):
+		pass # TODO

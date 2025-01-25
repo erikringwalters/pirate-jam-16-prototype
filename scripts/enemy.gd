@@ -17,6 +17,7 @@ func _ready() -> void:
 	add_child(weapon)
 	weapon.set_weapon_type(weapon_name)
 	weapon.enemy_pick_up()
+	weapon.set_deferred("disabled", true)
 	weapon.global_transform.origin = _weapon_marker.global_transform.origin
 	weapon.rotation.x += deg_to_rad(90)
 	weapon.rotation.y += deg_to_rad(90)
@@ -75,6 +76,7 @@ func drop_weapon() -> void:
 	weapon.drop()
 	weapon.reparent(get_parent(), true)
 	weapon.set_collision_layers(false, false)
+	weapon.set_deferred("disabled", false)
 	weapon.set_deferred("freeze", false)
 	print(weapon)
 	
