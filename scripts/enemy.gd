@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+signal died
+
 @export var move_speed = 1.0
 @export var acceleration := 50.0
 @export var max_health := 100.0
@@ -9,10 +11,13 @@ extends RigidBody3D
 
 var weapon_name:NodePath
 var weapon:Node3D
+var is_alive = true
 
 func _ready() -> void:
+	self.add_to_group("Enemy")
 	weapon_name = Items.weapons.keys()[randi_range(0, Items.weapons.size() - 1)]
-	print(weapon_name)
+	connect("died", Callable(get_parent(), "_on_enemy_died"))
+	#print(weapon_name)
 	weapon = Items.weapons[str(weapon_name)]['weapon_scene'].instantiate()
 	add_child(weapon)
 	weapon.set_weapon_type(weapon_name)
@@ -59,6 +64,10 @@ func process_damage(dmg):
 		# maybe make it explode here or something
 		drop_weapon()
 		reset_material_color()
+		# to prevent emitting multiple times if hit by multiple bullets
+		if is_alive:
+			died.emit()
+			is_alive = false
 		queue_free()
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
