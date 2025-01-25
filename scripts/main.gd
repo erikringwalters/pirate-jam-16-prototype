@@ -6,7 +6,7 @@ extends Node3D
 @export var x_offset : float = 20.0
 @export var y_offset : float = 1.0
 @export var z_offset : float = 20.0
-@export var spread_offset : float = 1.5
+@export var spread_offset : float = 5
 
 func _ready() -> void:
 	spawn_wave(5)
@@ -15,8 +15,10 @@ func _ready() -> void:
 func spawn_wave(n:int) -> void:
 	for i in n:
 		for j in n:
+			# Spawn enemy
 			var enemy = enemy_scene.instantiate()
 			add_child(enemy)
+			# Spawn weapon alone
 			#var weapon = weapon_scene.instantiate()
 			#add_child(weapon)
 			#enemy.global_transform.origin = Vector3(

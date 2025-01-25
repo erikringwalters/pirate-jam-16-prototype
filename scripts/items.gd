@@ -7,7 +7,7 @@ var common_base_cooldown := 1.5
 	"Dagger" : {
 		"path":"res://assets/weapons/Dagger.fbx",
 		"weapon_scene": ResourceLoader.load("res://scenes/weapons/dagger.tscn"),
-		"base_damage": 100.0,
+		"base_damage": 10.0,
 		"damage_mult": 1.0,
 		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
@@ -16,7 +16,7 @@ var common_base_cooldown := 1.5
 	"Sword" : {
 		"path":"res://assets/weapons/Sword.fbx",
 		"weapon_scene": ResourceLoader.load("res://scenes/weapons/sword.tscn"),
-		"base_damage": 100.0,
+		"base_damage": 10.0,
 		"damage_mult": 1.0,
 		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
@@ -25,7 +25,7 @@ var common_base_cooldown := 1.5
 	"Handgun" : {
 		"path":"res://assets/weapons/Handgun.fbx",
 		"weapon_scene": ResourceLoader.load("res://scenes/weapons/handgun.tscn"),
-		"base_damage": 100.0,
+		"base_damage": 10.0,
 		"damage_mult": 1.0,
 		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
@@ -34,7 +34,7 @@ var common_base_cooldown := 1.5
 	"Shotgun" : {
 		"path":"res://assets/weapons/Shotgun.fbx",
 		"weapon_scene": ResourceLoader.load("res://scenes/weapons/shotgun.tscn"),
-		"base_damage": 100.0,
+		"base_damage": 10.0,
 		"damage_mult": 1.0,
 		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
@@ -43,7 +43,7 @@ var common_base_cooldown := 1.5
 	"Rocket" : {
 		"path":"res://assets/weapons/Rocket.fbx",
 		"weapon_scene": ResourceLoader.load("res://scenes/weapons/rocket.tscn"),
-		"base_damage": 100.0,
+		"base_damage": 10.0,
 		"damage_mult": 1.0,
 		"base_cooldown": 2.0,
 		"cooldown_mult": 1.0,

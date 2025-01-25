@@ -9,6 +9,7 @@ extends RigidBody3D
 @export_group("Movement")
 @export var move_speed := 16.0
 @export var acceleration := 50.0
+@export var health = 10000
 
 var _camera_input_direction := Vector2.ZERO
 
@@ -77,5 +78,19 @@ func _on_pickup_body_entered(body: Node3D) -> void:
 	if(body.is_in_group("Pickup") and collision != null):
 		collision.reparent(self, true)
 		collision.get_node("HitBox").connect("body_entered", Callable(self, "_on_pickup_body_entered"))
+		collision.get_node("HitBox").connect("area_entered", Callable(self, "_on_pickup_area_entered"))
 		body.set_deferred("freeze", true)
 		body.pick_up()
+
+func _on_pickup_area_entered(area: Node3D) -> void:
+	take_hit(area)
+	
+func _on_hit_box_area_entered(area: Area3D) -> void:
+	take_hit(area)
+
+func take_hit(area:Node3D):
+	if area.is_in_group("Projectile"):
+		print("ouch player's hit")
+		health -= area.projectile_damage() if area.has_method("projectile_damage") else 0
+		print("player health: ", health)
+		area.queue_free()

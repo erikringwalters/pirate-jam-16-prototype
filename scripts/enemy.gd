@@ -2,7 +2,7 @@ extends RigidBody3D
 
 @export var move_speed = 1.0
 @export var acceleration := 50.0
-@export var max_health := 1000.0
+@export var max_health := 100.0
 @export var turn_speed := 0.01
 
 @onready var _weapon_marker = %WeaponMarker
@@ -11,13 +11,17 @@ var weapon_name:NodePath
 var weapon:Node3D
 
 func _ready() -> void:
-	weapon_name = "Handgun"
+	weapon_name = Items.weapons.keys()[randi_range(0, Items.weapons.size() - 1)]
+	print(weapon_name)
 	weapon = Items.weapons[str(weapon_name)]['weapon_scene'].instantiate()
 	add_child(weapon)
 	weapon.set_weapon_type(weapon_name)
 	weapon.enemy_pick_up()
 	weapon.global_transform.origin = _weapon_marker.global_transform.origin
-	weapon.rotation.y += deg_to_rad(180)
+	weapon.rotation.x += deg_to_rad(90)
+	weapon.rotation.y += deg_to_rad(90)
+	weapon.rotation.z += deg_to_rad(-90)
+
 	weapon.set_deferred("freeze", true)
 	#get_node("RBCollision/MeshInstance3D").surface_material_override(0.resource_local_to_scene = true)
 	

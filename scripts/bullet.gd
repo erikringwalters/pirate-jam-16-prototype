@@ -1,7 +1,7 @@
 extends Area3D
 
 const SPEED : float = 20.0
-var damage : float = 100.0
+var damage : float = 10.0
 var type : String
 
 @onready var mesh :MeshInstance3D = $MeshInstance3D

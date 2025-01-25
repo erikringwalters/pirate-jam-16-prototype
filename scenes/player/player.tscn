@@ -50,8 +50,8 @@ unique_name_in_owner = true
 
 [node name="HitBox" type="Area3D" parent="."]
 unique_name_in_owner = true
-collision_layer = 4
-collision_mask = 4
+collision_layer = 68
+collision_mask = 68
 
 [node name="HitBoxCollision" type="CollisionShape3D" parent="HitBox"]
 shape = SubResource("SphereShape3D_ig7tw")
@@ -89,4 +89,5 @@ mesh = SubResource("CylinderMesh_7mycd")
 skeleton = NodePath("../..")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_pickup_area_entered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="body_entered" from="HitBox" to="." method="_on_pickup_body_entered"]

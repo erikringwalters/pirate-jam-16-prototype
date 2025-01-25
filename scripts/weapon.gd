@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-@export var damage : float = 100.0
+@export var damage : float = 10.0
 @export var is_projectile_weapon : bool = false
 
 # DM Note: Couldn't figure out how to check which RigidBody3D model the weapon was using, so this was the next best thing I could think of.
@@ -58,7 +58,8 @@ func shoot() -> void:
 			projectile.transform.basis = projectile.transform.basis.rotated(axis, rotation_amount)
 			axis = Vector3(0, 0, 1)
 			rotation_amount = float((randi() % 180) - 90)/1000
-			projectile.transform.basis = projectile.transform.basis.rotated(axis, rotation_amount)	
+			projectile.transform.basis = projectile.transform.basis.rotated(axis, rotation_amount)
+			projectile.add_to_group("Projectile")
 			add_child_logic(projectile)	
 	else:
 		projectile = projectile_scene.instantiate()
@@ -68,12 +69,14 @@ func shoot() -> void:
 		projectile.set_damage(Items.weapons[weapon_type]['base_damage'])
 		projectile.set_collision_layers(is_pickedup and get_collision_layer_value(CollisionLayers.ENEMY_DAMAGE))
 		print(get_collision_layer_value(CollisionLayers.PLAYER_DAMAGE))
+		projectile.add_to_group("Projectile")
 		add_child_logic(projectile)
 
 func start_shot_timer() -> void:
 	if(weapon_type):
 		var timer = Timer.new()
 		timer.wait_time = Items.weapons[weapon_type]['base_cooldown']
+		#timer.time_left = randf_range(0.0, timer.wait_time) # Randomize time on start?
 		add_child(timer)
 		timer.start()
 		timer.connect("timeout", Callable(self,"auto_shoot"))
@@ -92,7 +95,7 @@ func pick_up() -> void:
 
 # DM Note: Timer triggered auto_shoot function with console logs for each weapon type
 func auto_shoot() -> void:
-	if is_pickedup:
+	if is_pickedup && is_projectile_weapon:
 		shoot()
 
 func melee_damage():
