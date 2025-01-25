@@ -7,7 +7,7 @@
 size = Vector3(0.2, 2.5, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2hjgi"]
-size = Vector3(0.25, 2.5, 0.25)
+size = Vector3(0.25, 2, 0.25)
 
 [node name="RocketLauncher_PickupItem" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

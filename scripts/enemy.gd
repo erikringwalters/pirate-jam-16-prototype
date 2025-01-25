@@ -3,6 +3,7 @@ extends RigidBody3D
 @export var move_speed = 1.0
 @export var acceleration := 50.0
 @export var max_health := 1000.0
+@export var turn_speed := 0.01
 
 @onready var _weapon_marker = %WeaponMarker
 
@@ -10,7 +11,7 @@ var weapon_name:NodePath
 var weapon:Node3D
 
 func _ready() -> void:
-	weapon_name = "Rocket"
+	weapon_name = "Handgun"
 	weapon = Items.weapons[str(weapon_name)]['weapon_scene'].instantiate()
 	add_child(weapon)
 	weapon.set_weapon_type(weapon_name)
@@ -25,7 +26,7 @@ func _physics_process(delta: float) -> void:
 		global_transform.origin, 
 		get_parent().get_node("Player").global_transform.origin
 	)
-	global_rotation.y = lerp_angle(global_rotation.y, look_direction-1.55, 0.05)
+	global_rotation.y = lerp_angle(global_rotation.y, look_direction-1.55, turn_speed)
 	# Move toward player
 	var move_direction := global_basis.z
 	move_direction.y = 0.0

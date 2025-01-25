@@ -15,12 +15,12 @@ func _ready() -> void:
 func spawn_wave(n:int) -> void:
 	for i in n:
 		for j in n:
-			#var enemy = enemy_scene.instantiate()
-			#add_child(enemy)
-			var weapon = weapon_scene.instantiate()
-			add_child(weapon)
+			var enemy = enemy_scene.instantiate()
+			add_child(enemy)
+			#var weapon = weapon_scene.instantiate()
+			#add_child(weapon)
 			#enemy.global_transform.origin = Vector3(
-			weapon.global_transform.origin = Vector3(
+			enemy.global_transform.origin = Vector3(
 				i * spread_offset + x_offset,
 				y_offset, 
 				j * spread_offset + z_offset

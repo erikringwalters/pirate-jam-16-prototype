@@ -73,8 +73,8 @@ func _physics_process(delta: float) -> void:
 	angular_velocity.z = clamp(vel.z, -move_speed, move_speed)
 
 func _on_pickup_body_entered(body: Node3D) -> void:
-	if(body.is_in_group("Pickup")):
-		var collision = body.get_node("RBCollision")
+	var collision = body.get_node_or_null("RBCollision")
+	if(body.is_in_group("Pickup") and collision != null):
 		collision.reparent(self, true)
 		collision.get_node("HitBox").connect("body_entered", Callable(self, "_on_pickup_body_entered"))
 		body.set_deferred("freeze", true)

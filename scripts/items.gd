@@ -1,5 +1,7 @@
 extends Node
 
+var common_base_cooldown := 1.5
+
 #name, file path, base_damage, damage_mult, base_cooldown, cooldown_mult, model_scale
 @onready var weapons : Dictionary = {
 	"Dagger" : {
@@ -7,7 +9,7 @@ extends Node
 		"weapon_scene": ResourceLoader.load("res://scenes/weapons/dagger.tscn"),
 		"base_damage": 100.0,
 		"damage_mult": 1.0,
-		"base_cooldown": 0.25,
+		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
 	}, 
@@ -16,7 +18,7 @@ extends Node
 		"weapon_scene": ResourceLoader.load("res://scenes/weapons/sword.tscn"),
 		"base_damage": 100.0,
 		"damage_mult": 1.0,
-		"base_cooldown": 0.25,
+		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
 	}, 
@@ -25,7 +27,7 @@ extends Node
 		"weapon_scene": ResourceLoader.load("res://scenes/weapons/handgun.tscn"),
 		"base_damage": 100.0,
 		"damage_mult": 1.0,
-		"base_cooldown": 0.25,
+		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
 	}, 
@@ -34,7 +36,7 @@ extends Node
 		"weapon_scene": ResourceLoader.load("res://scenes/weapons/shotgun.tscn"),
 		"base_damage": 100.0,
 		"damage_mult": 1.0,
-		"base_cooldown": 0.25,
+		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
 	}, 
