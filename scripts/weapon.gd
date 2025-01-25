@@ -32,7 +32,7 @@ func _ready() -> void:
 
 func add_child_logic(_projectile) -> void:
 	# Currently, when an enemy spawns with a projectile weapon, the `get_parent()` returns
-	#	the enemy, making the projectile continuously follows the rotation of the enemy. So 
+	#	the enemy, making the projectile continuously follow the rotation of the enemy. So 
 	#	instead we need to go a level higher to assign the world as the parent
 	if ('Main' in String(get_parent().name)):
 		get_parent().add_child(_projectile)
@@ -68,7 +68,7 @@ func shoot() -> void:
 		projectile.set_type(projectile_type)
 		projectile.set_damage(Items.weapons[weapon_type]['base_damage'])
 		projectile.set_collision_layers(is_pickedup and get_collision_layer_value(CollisionLayers.ENEMY_DAMAGE))
-		print(get_collision_layer_value(CollisionLayers.PLAYER_DAMAGE))
+		#print(get_collision_layer_value(CollisionLayers.PLAYER_DAMAGE))
 		projectile.add_to_group("Projectile")
 		add_child_logic(projectile)
 
@@ -99,6 +99,7 @@ func auto_shoot() -> void:
 		shoot()
 
 func melee_damage():
+	print('melee hit')
 	return Items.weapons[weapon_type]['base_damage']
 
 func drop() -> void:

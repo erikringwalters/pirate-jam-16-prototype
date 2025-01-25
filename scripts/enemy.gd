@@ -56,6 +56,9 @@ func reset_material_color() -> void:
 func _on_reset_hit_color_timeout() -> void:
 	reset_material_color()
 
+func enemy_process_melee_damage(dmg) -> void:
+	process_damage(dmg)
+
 func process_damage(dmg):
 	$RBCollision/MeshInstance3D.material_override.emission = Color(100, 0 ,0)
 	$ResetHitColor.start()
@@ -71,6 +74,7 @@ func process_damage(dmg):
 		queue_free()
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
+	print('adsufyoausidyaouidyfoadf', area.name)
 	if area.has_method("projectile_damage"):
 		process_damage(area.projectile_damage())
 		if (area.type=="Rocket" or area.type=="rocket"):
@@ -78,8 +82,6 @@ func _on_hit_box_area_entered(area: Area3D) -> void:
 			get_parent().add_child(expl)
 			expl.global_transform.origin = area.global_transform.origin
 		area.queue_free()
-	elif area.has_method("melee_damage"):
-		process_damage(area.melee_damage())
 
 func drop_weapon() -> void:
 	weapon.drop()
@@ -87,6 +89,5 @@ func drop_weapon() -> void:
 	weapon.set_collision_layers(false, false)
 	weapon.set_deferred("disabled", false)
 	weapon.set_deferred("freeze", false)
-	print(weapon)
 	
 	

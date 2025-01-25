@@ -82,12 +82,18 @@ func _on_pickup_body_entered(body: Node3D) -> void:
 		body.set_deferred("disabled", false)
 		body.set_deferred("freeze", true)
 		body.pick_up()
+	# initiate hitting an enemy with a melee weapon
+	if (body.has_method('enemy_process_melee_damage')):
+		body.enemy_process_melee_damage(Items.weapons['Sword']['base_damage'])
 
 func _on_pickup_area_entered(area: Node3D) -> void:
 	take_hit(area)
 	
 func _on_hit_box_area_entered(area: Area3D) -> void:
 	take_hit(area)
+
+func player_process_melee_damage(dmg):
+	print('player got hit by a sword or sumthing')
 
 func take_hit(area:Node3D):
 	if area.is_in_group("Projectile"):
