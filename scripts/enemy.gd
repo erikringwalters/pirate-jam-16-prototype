@@ -59,6 +59,9 @@ func _on_reset_hit_color_timeout() -> void:
 func enemy_process_melee_damage(dmg) -> void:
 	process_damage(dmg)
 
+func enemy_process_explosion_damage(dmg):
+	process_damage(dmg)
+
 func process_damage(dmg):
 	$RBCollision/MeshInstance3D.material_override.emission = Color(100, 0 ,0)
 	$ResetHitColor.start()
@@ -74,12 +77,12 @@ func process_damage(dmg):
 		queue_free()
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
-	print('adsufyoausidyaouidyfoadf', area.name)
 	if area.has_method("projectile_damage"):
 		process_damage(area.projectile_damage())
 		if (area.type=="Rocket" or area.type=="rocket"):
 			var expl = Items.explosion.instantiate()
 			get_parent().add_child(expl)
+			expl.fired_by_player = area.fired_by_player
 			expl.global_transform.origin = area.global_transform.origin
 		area.queue_free()
 

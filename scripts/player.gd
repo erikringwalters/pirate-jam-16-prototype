@@ -92,15 +92,32 @@ func _on_pickup_body_entered(body: Node3D) -> void:
 func _on_pickup_area_entered(area: Node3D) -> void:
 	take_hit(area)
 	
-func _on_hit_box_area_entered(area: Area3D) -> void:
-	take_hit(area)
+#func _on_hit_box_area_entered(area: Area3D) -> void:
+	#take_hit(area)
+
+func player_process_explosion_damage(damage):
+	#health -= damage/3
+	print("player splosion")
+	if health <= 0:
+		get_parent().get_node("UI").game_over()
 
 func player_process_melee_damage(_dmg):
 	print('player got hit by a sword or sumthing')
+	
+# Despawn the projectile and create explosion if a rocket
+func handle_projectile_despawn(area:Node3D):
+	if area.has_method("projectile_damage"):
+		if (area.type=="Rocket" or area.type=="rocket"):
+			var expl = Items.explosion.instantiate()
+			get_parent().add_child(expl)
+			expl.fired_by_player = area.fired_by_player
+			expl.global_transform.origin = area.global_transform.origin
+		area.queue_free()
 
 func take_hit(area:Node3D):
 	if area.is_in_group("Projectile"):
 		health -= area.projectile_damage() if area.has_method("projectile_damage") else 0
+		handle_projectile_despawn(area)
 		print("player health: ", health)
 		if health <= 0:
 			get_parent().get_node("UI").game_over()

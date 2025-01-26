@@ -22,7 +22,7 @@ shape = SubResource("BoxShape3D_kjqmh")
 
 [node name="RayCast" type="RayCast3D" parent="RBCollision"]
 unique_name_in_owner = true
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.000982918, 1.28569, -2.62268e-08)
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.000982918, 1.58952, -3.95079e-08)
 
 [node name="Rocket" parent="RBCollision" instance=ExtResource("1_6gyb8")]
 transform = Transform3D(-3.27835e-08, 0.75, 0, -0.75, -3.27835e-08, 0, 0, 0, 0.75, 2.30443e-09, 0.0527193, 0)

@@ -7,6 +7,8 @@ var type : String
 @onready var mesh :MeshInstance3D = $MeshInstance3D
 @onready var ray : RayCast3D = $RayCast3D
 
+var fired_by_player
+
 func _ready():
 	$Life.start()
 

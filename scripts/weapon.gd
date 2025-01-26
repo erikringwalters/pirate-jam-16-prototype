@@ -20,6 +20,8 @@ var gun_barrel
 var projectile_scene
 var projectile
 
+var held_by_player = false
+
 func _ready() -> void:
 	if (projectile_type and projectile_type != ''):
 		projectile_scene = Items.projectiles[projectile_type]
@@ -46,7 +48,7 @@ func shoot() -> void:
 			projectile = projectile_scene.instantiate()
 			projectile.position = gun_barrel.global_position
 			projectile.transform.basis = gun_barrel.global_transform.basis
-			projectile.set_type(projectile_type)
+			projectile.fired_by_player = held_by_player
 			projectile.set_damage(Items.weapons[weapon_type]['base_damage'])
 			projectile.set_collision_layers(is_pickedup and get_collision_layer_value(CollisionLayers.ENEMY_DAMAGE))
 			# Randomly rotate each axis
@@ -65,6 +67,7 @@ func shoot() -> void:
 		projectile = projectile_scene.instantiate()
 		projectile.position = gun_barrel.global_position
 		projectile.transform.basis = gun_barrel.global_transform.basis
+		projectile.fired_by_player = held_by_player
 		projectile.set_type(projectile_type)
 		projectile.set_damage(Items.weapons[weapon_type]['base_damage'])
 		projectile.set_collision_layers(is_pickedup and get_collision_layer_value(CollisionLayers.ENEMY_DAMAGE))
@@ -91,6 +94,7 @@ func pick_up() -> void:
 	print('player pickup')
 	is_pickedup = true
 	set_collision_layers(false, true)
+	held_by_player = true
 	start_shot_timer()
 
 # DM Note: Timer triggered auto_shoot function with console logs for each weapon type
