@@ -96,13 +96,16 @@ func _on_pickup_area_entered(area: Node3D) -> void:
 	#take_hit(area)
 
 func player_process_explosion_damage(damage):
-	#health -= damage/3
+	health -= damage/3
 	print("player splosion")
 	if health <= 0:
 		get_parent().get_node("UI").game_over()
 
-func player_process_melee_damage(_dmg):
-	print('player got hit by a sword or sumthing')
+func player_process_melee_damage(dmg):
+	health -= dmg
+	print("player health: ", health)
+	if health <= 0:
+		get_parent().get_node("UI").game_over()
 	
 # Despawn the projectile and create explosion if a rocket
 func handle_projectile_despawn(area:Node3D):
@@ -121,7 +124,5 @@ func take_hit(area:Node3D):
 		print("player health: ", health)
 		if health <= 0:
 			get_parent().get_node("UI").game_over()
-	elif area.is_in_group("Melee"):
-		pass # TODO
 
 	

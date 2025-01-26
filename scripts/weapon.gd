@@ -31,6 +31,8 @@ func _ready() -> void:
 		#can_shoot = true
 		_raycast = %RayCast
 		gun_barrel = _raycast
+	else:
+		damage = Items.weapons[weapon_type]['base_damage']
 
 func add_child_logic(_projectile) -> void:
 	# Currently, when an enemy spawns with a projectile weapon, the `get_parent()` returns

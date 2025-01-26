@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnab25acrgyoy"]
+[gd_scene load_steps=9 format=3 uid="uid://dnab25acrgyoy"]
 
 [ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_ieojg"]
 [ext_resource type="PackedScene" uid="uid://5m03qf0byasr" path="res://assets/weapons/Dagger.fbx" id="1_lw0yl"]
+[ext_resource type="Script" uid="uid://bmxohij374ah2" path="res://scripts/melee_player_area.gd" id="3_n5jhk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ieojg"]
 size = Vector3(0.1, 0.75, 0.1)
@@ -16,11 +17,15 @@ radius = 0.15
 [sub_resource type="BoxShape3D" id="BoxShape3D_n5jhk"]
 size = Vector3(0.15, 1, 0.15)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_j34lm"]
+size = Vector3(0.25, 0.205, 0.895)
+
 [node name="Dagger_PickupItem" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, 1, -1, 4.37114e-08, -4.37114e-08, 0, 0, 0)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_ieojg")
+weapon_type = "Dagger"
 
 [node name="RBCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -40,3 +45,12 @@ shape = SubResource("BoxShape3D_n5jhk")
 
 [node name="Anchor" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18557e-08, 0, -0.8)
+
+[node name="MeleePlayerArea" type="Area3D" parent="."]
+script = ExtResource("3_n5jhk")
+
+[node name="MeleePlayerCollision" type="CollisionShape3D" parent="MeleePlayerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.59267e-09, 3.31886e-16, 0.1737)
+shape = SubResource("BoxShape3D_j34lm")
+
+[connection signal="body_entered" from="MeleePlayerArea" to="MeleePlayerArea" method="_on_body_entered"]

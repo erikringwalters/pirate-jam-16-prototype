@@ -2,7 +2,7 @@ extends Area3D
 
 var damage : float = 500
 var items_in_radius : Array
-var explosion_force : int = 3
+var explosion_force : int = 5
 
 var fired_by_player = false
 
@@ -40,7 +40,7 @@ func explosion():
 		#Getting a direction vector between the bomb and all nearby RigidBodies. This line of code later helps to calculate a trajectory    for the Rigidbodies.
 		force_dir = global_position.direction_to(j.global_position)
 		#Make it go up because otherwise it is shoved into the ground
-		force_dir += Vector3(0.0,0.2,0.0)
+		force_dir += Vector3(0.0,1.0,0.0)
 		#Generating a position on the object where the force will be applied. This line of code makes the Rigidbodies randomly rotate after the explosion.
 		#random_vector = Vector3(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)) * force_dir
 		#j.apply_impulse(random_vector, force_dir * explosion_force)
