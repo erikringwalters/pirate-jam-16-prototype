@@ -106,7 +106,10 @@ func auto_shoot() -> void:
 
 func melee_damage():
 	print('melee hit')
-	return Items.weapons[weapon_type]['base_damage']
+	if (!is_projectile_weapon):
+		return Items.weapons[weapon_type]['base_damage']
+	else:
+		return 0
 
 func drop() -> void:
 	is_pickedup = false

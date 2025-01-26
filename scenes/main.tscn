@@ -1,9 +1,74 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct0tti2mfck6l"]
+[gd_scene load_steps=10 format=3 uid="uid://ct0tti2mfck6l"]
 
 [ext_resource type="Script" uid="uid://m47833sgukq5" path="res://scenes/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bfcjpq4efming" path="res://scenes/level/level.tscn" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://cul6ubtb1emuc" path="res://scripts/environment_bounds.gd" id="3_sugp2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sugp2"]
+size = Vector3(110, 1, 110)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jyhfs"]
+size = Vector3(110, 1, 110)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tbgi4"]
+size = Vector3(110, 110, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tefeu"]
+size = Vector3(110, 110, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6xl0"]
+size = Vector3(1, 110, 110)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tipki"]
+size = Vector3(1, 110, 110)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_0wfyh")
 
 [node name="Level" parent="." instance=ExtResource("2_sugp2")]
+
+[node name="EnvironmentCollision" type="Node" parent="."]
+script = ExtResource("3_sugp2")
+
+[node name="Floor" type="Area3D" parent="EnvironmentCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.387873, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnvironmentCollision/Floor"]
+shape = SubResource("BoxShape3D_sugp2")
+
+[node name="Ceiling" type="Area3D" parent="EnvironmentCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 80.3945, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnvironmentCollision/Ceiling"]
+shape = SubResource("BoxShape3D_jyhfs")
+
+[node name="WallNegZ" type="Area3D" parent="EnvironmentCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38.1331, -40.3093)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnvironmentCollision/WallNegZ"]
+shape = SubResource("BoxShape3D_tbgi4")
+
+[node name="WallPosZ" type="Area3D" parent="EnvironmentCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.9787, 40.3638)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnvironmentCollision/WallPosZ"]
+shape = SubResource("BoxShape3D_tefeu")
+
+[node name="WallNegX" type="Area3D" parent="EnvironmentCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.2455, 37.7207, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnvironmentCollision/WallNegX"]
+shape = SubResource("BoxShape3D_o6xl0")
+
+[node name="WallPosX" type="Area3D" parent="EnvironmentCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.329, 37.4878, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnvironmentCollision/WallPosX"]
+shape = SubResource("BoxShape3D_tipki")
+
+[connection signal="area_entered" from="EnvironmentCollision/Floor" to="EnvironmentCollision" method="_on_floor_area_entered"]
+[connection signal="area_entered" from="EnvironmentCollision/Ceiling" to="EnvironmentCollision" method="_on_ceiling_area_entered"]
+[connection signal="area_entered" from="EnvironmentCollision/WallNegZ" to="EnvironmentCollision" method="_on_wall_neg_z_area_entered"]
+[connection signal="area_entered" from="EnvironmentCollision/WallPosZ" to="EnvironmentCollision" method="_on_wall_pos_z_area_entered"]
+[connection signal="area_entered" from="EnvironmentCollision/WallNegX" to="EnvironmentCollision" method="_on_wall_neg_x_area_entered"]
+[connection signal="area_entered" from="EnvironmentCollision/WallPosX" to="EnvironmentCollision" method="_on_wall_pos_x_area_entered"]
