@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cm2m4cps6lnq"]
+[gd_scene load_steps=4 format=3 uid="uid://cm2m4cps6lnq"]
 
 [ext_resource type="Script" uid="uid://0mpka6bilbyr" path="res://scripts/ui.gd" id="1_u7n8c"]
+[ext_resource type="Texture2D" uid="uid://dxgqlnsjs360h" path="res://assets/vectors/health_bar_empty.svg" id="2_aac20"]
+[ext_resource type="Texture2D" uid="uid://be24yniigfesd" path="res://assets/vectors/health_bar_full.svg" id="3_g5kmx"]
 
 [node name="UI" type="Control"]
 process_mode = 3
@@ -12,6 +14,23 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_u7n8c")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -1072.0
+offset_top = -89.955
+offset_right = -664.0
+offset_bottom = -58.955
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 1000.0
+texture_under = ExtResource("2_aac20")
+texture_progress = ExtResource("3_g5kmx")
 
 [node name="BlackScreen" type="ColorRect" parent="."]
 layout_mode = 1

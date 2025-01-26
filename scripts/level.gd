@@ -14,7 +14,7 @@ var enemy_count = 0
 
 func _ready() -> void:
 	enemy_count_timer.wait_time = 0.1
-	spawn_wave(5)
+	spawn_wave(2)
 
 # n will be squared
 func spawn_wave(n:int) -> void:

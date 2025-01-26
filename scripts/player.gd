@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+signal health_changed
+
 @export_group("Camera")
 # Mouse sensitivity should be low because on browser sensitivity is way higher
 @export_range(0.0, 1.0) var camera_mouse_sensitivity := 0.25
@@ -9,7 +11,6 @@ extends RigidBody3D
 @export_group("Movement")
 @export var move_speed := 16.0
 @export var acceleration := 50.0
-@export var health = 1000
 
 var _camera_input_direction := Vector2.ZERO
 
@@ -18,6 +19,7 @@ var _camera_input_direction := Vector2.ZERO
 
 func _ready() -> void:
 	%CameraPivot.top_level = true
+	connect("health_changed", Callable(get_parent().get_node("UI"), "_on_health_changed"))
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
@@ -96,15 +98,17 @@ func _on_pickup_area_entered(area: Node3D) -> void:
 	#take_hit(area)
 
 func player_process_explosion_damage(damage):
-	health -= damage/3
+	GameState.player_health -= damage/3
+	health_changed.emit()
 	print("player splosion")
-	if health <= 0:
+	if GameState.player_health <= 0:
 		get_parent().get_node("UI").game_over()
 
 func player_process_melee_damage(dmg):
-	health -= dmg
-	print("player health: ", health)
-	if health <= 0:
+	GameState.player_health -= dmg
+	health_changed.emit()
+	print("player health: ", GameState.player_health)
+	if GameState.player_health <= 0:
 		get_parent().get_node("UI").game_over()
 	
 # Despawn the projectile and create explosion if a rocket
@@ -119,10 +123,11 @@ func handle_projectile_despawn(area:Node3D):
 
 func take_hit(area:Node3D):
 	if area.is_in_group("Projectile"):
-		health -= area.projectile_damage() if area.has_method("projectile_damage") else 0
+		GameState.player_health -= area.projectile_damage() if area.has_method("projectile_damage") else 0
+		health_changed.emit()
 		handle_projectile_despawn(area)
-		print("player health: ", health)
-		if health <= 0:
+		print("player health: ", GameState.player_health)
+		if GameState.player_health <= 0:
 			get_parent().get_node("UI").game_over()
 
 	

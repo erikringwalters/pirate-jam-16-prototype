@@ -5,7 +5,6 @@ var level_instance:Node
 func _ready() -> void:
 	level_instance = $Level
 
-
 func unload_level():
 	if is_instance_valid(level_instance):
 		level_instance.queue_free()
