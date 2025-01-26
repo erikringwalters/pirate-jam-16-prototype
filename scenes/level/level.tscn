@@ -1,0 +1,109 @@
+[gd_scene load_steps=17 format=3 uid="uid://bfcjpq4efming"]
+
+[ext_resource type="Script" uid="uid://bncu4llldqjrd" path="res://scripts/level.gd" id="1_m0bv2"]
+[ext_resource type="PackedScene" uid="uid://cqtfijlj7vwni" path="res://scenes/enemy/enemy.tscn" id="2_b7m21"]
+[ext_resource type="PackedScene" uid="uid://bo4r5t2hvavcu" path="res://scenes/weapons/shotgun.tscn" id="3_pm6rs"]
+[ext_resource type="PackedScene" uid="uid://cm2m4cps6lnq" path="res://scenes/ui/ui.tscn" id="4_vrc4q"]
+[ext_resource type="PackedScene" uid="uid://bwge4babpy161" path="res://scenes/player/player.tscn" id="5_x4oov"]
+[ext_resource type="Script" uid="uid://dhjhidvuhk8dv" path="res://scripts/spawner.gd" id="6_ivku7"]
+[ext_resource type="PhysicsMaterial" uid="uid://baifveh640c1m" path="res://materials/physics_friction.tres" id="7_ss4b2"]
+[ext_resource type="Shader" uid="uid://cyolrnj113mxo" path="res://shaders/floor.gdshader" id="8_qjqsm"]
+[ext_resource type="PackedScene" uid="uid://dnab25acrgyoy" path="res://scenes/weapons/dagger.tscn" id="9_0fkkc"]
+[ext_resource type="PackedScene" uid="uid://ch5f82om4wwn7" path="res://scenes/weapons/handgun.tscn" id="10_wyi7n"]
+[ext_resource type="PackedScene" uid="uid://hjn3ta46v6nr" path="res://scenes/weapons/rocket.tscn" id="11_3rml5"]
+[ext_resource type="PackedScene" uid="uid://obopymb5flt6" path="res://scenes/weapons/sword.tscn" id="12_a5iu8"]
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 1
+background_color = Color(0.138034, 0.138034, 0.138034, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.533333, 0.533333, 0.533333, 1)
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.304462, 0.304462, 0.304462, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
+size = Vector3(100, 10, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+render_priority = 0
+shader = ExtResource("8_qjqsm")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.158999, 0.0604092, 0.00201173, 1)
+shader_parameter/background_color_two = Color(0.158938, 0.23814, 0.290237, 1)
+shader_parameter/grid_color = Color(0, 0, 0, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0.272655, 0.272655, 0.272655, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.716296, 0.716296, 0.716296, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_7mycd"]
+material = SubResource("ShaderMaterial_lquwl")
+size = Vector3(100, 10, 100)
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_m0bv2")
+enemy_scene = ExtResource("2_b7m21")
+weapon_scene = ExtResource("3_pm6rs")
+
+[node name="UI" parent="." instance=ExtResource("4_vrc4q")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h2yge")
+
+[node name="Player" parent="." instance=ExtResource("5_x4oov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Spawner" type="Node3D" parent="."]
+script = ExtResource("6_ivku7")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+collision_layer = 17
+collision_mask = 17
+physics_material_override = ExtResource("7_ss4b2")
+
+[node name="FloorCollision" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_1bvp3")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_7mycd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0, 0.866025, 0.5, 3.55271e-15, -0.5, 0.866025, 1, 1.77636e-15, -3.07674e-15, 0, 30, 0)
+light_color = Color(0.938865, 0.90377, 0.865132, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="Dagger_PickupItem" parent="." instance=ExtResource("9_0fkkc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 2)
+
+[node name="Handgun_PickupItem" parent="." instance=ExtResource("10_wyi7n")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2, 1, 2)
+weapon_type = "Handgun"
+
+[node name="RocketLauncher_PickupItem" parent="." instance=ExtResource("11_3rml5")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 4)
+weapon_type = "Rocket"
+
+[node name="Shotgun_PickupItem" parent="." instance=ExtResource("3_pm6rs")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 4, 1, 3)
+weapon_type = "Shotgun"
+
+[node name="Sword_PickupItem" parent="." instance=ExtResource("12_a5iu8")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4, 1, 3)
+
+[node name="EnemyCountTimer" type="Timer" parent="."]
+unique_name_in_owner = true

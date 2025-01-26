@@ -42,7 +42,6 @@ func _on_enemy_died():
 
 		
 func wave_over():
-	# TODO: show game over screen
 	print("wave over")
 	print("new wave starting")
 	spawn_wave(5)
