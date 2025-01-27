@@ -12,9 +12,9 @@ func unload_level():
 
 func load_level(level_name:String):
 	unload_level()
+	GameState.reset()
 	var level_path:= "res://scenes/level/%s.tscn" % level_name
 	var level_resource:=load(level_path)
 	if level_resource:
 		level_instance = level_resource.instantiate()
 		add_child(level_instance)
-	GameState.is_game_over = false
