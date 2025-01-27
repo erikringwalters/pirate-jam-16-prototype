@@ -8,14 +8,14 @@ extends Node3D
 @export var z_offset : float = 20.0
 @export var spread_offset : float = 5
 
-var enemy_count = 0
+var enemies_remaining = 0
 
-@onready var enemy_count_timer = %EnemyCountTimer
+@onready var enemies_remaining_timer = %EnemyCountTimer
 @onready var ui = $UI
 
 func _ready() -> void:
-	enemy_count_timer.wait_time = 0.1
-	spawn_wave(0)
+	enemies_remaining_timer.wait_time = 0.1
+	spawn_wave(2)
 
 # n will be squared
 func spawn_wave(n:int) -> void:
@@ -24,7 +24,7 @@ func spawn_wave(n:int) -> void:
 			# Spawn enemy
 			var enemy = enemy_scene.instantiate()
 			add_child(enemy)
-			enemy_count += 1
+			enemies_remaining += 1
 			# Spawn weapon alone
 			#var weapon = weapon_scene.instantiate()
 			#add_child(weapon)
@@ -36,12 +36,12 @@ func spawn_wave(n:int) -> void:
 			)
 
 func _on_enemy_died():
-	enemy_count -= 1
+	enemies_remaining -= 1
 	GameState.score += 1
 	ui.update_score()
-	print(enemy_count, " enemies left")
-	if enemy_count <= 0:
-		enemy_count_timer.start()
+	print(enemies_remaining, " enemies left")
+	if enemies_remaining <= 0:
+		enemies_remaining_timer.start()
 
 		
 func wave_over():
@@ -50,8 +50,8 @@ func wave_over():
 	spawn_wave(5)
 
 
-func _on_enemy_count_timer_timeout() -> void:
+func _on_enemies_remaining_timer_timeout() -> void:
 	#verify enemy count in case something went wrong
-	enemy_count = get_tree().get_node_count_in_group("Enemy")
-	if enemy_count <= 0:
+	enemies_remaining = get_tree().get_node_count_in_group("Enemy")
+	if enemies_remaining <= 0:
 		wave_over()
