@@ -33,11 +33,6 @@ environment = SubResource("Environment_h2yge")
 
 [node name="Player" parent="." instance=ExtResource("5_x4oov")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-camera_mouse_sensitivity = 0.25
-camera_stick_sensitivity = 0.5
-camera_stick_mult = 10.0
-move_speed = 16.0
-acceleration = 50.0
 
 [node name="Spawner" type="Node3D" parent="."]
 script = ExtResource("6_ivku7")
