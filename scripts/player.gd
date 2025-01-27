@@ -123,7 +123,8 @@ func handle_projectile_despawn(area:Node3D):
 
 func take_hit(area:Node3D):
 	if area.is_in_group("Projectile"):
-		GameState.player_health -= area.projectile_damage() if area.has_method("projectile_damage") else 0
+		if (!area.fired_by_player):
+			GameState.player_health -= area.projectile_damage() if area.has_method("projectile_damage") else 0
 		health_changed.emit()
 		handle_projectile_despawn(area)
 		print("player health: ", GameState.player_health)

@@ -9,8 +9,6 @@ func explode(area:Area3D) -> void:
 			expl.global_transform.origin = area.global_transform.origin
 		area.queue_free()
 
-
-
 func _on_floor_area_entered(area: Area3D) -> void:
 	explode(area)
 
