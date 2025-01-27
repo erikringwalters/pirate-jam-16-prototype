@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_63ngr"]
 [ext_resource type="PackedScene" uid="uid://1j4cgxkstdj6" path="res://assets/weapons/Handgun.fbx" id="1_xeypo"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_63ngr"]
-size = Vector3(0.25, 0.5, 0.15)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_63ngr"]
+radius = 0.15
+height = 0.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qcn5e"]
 size = Vector3(0.3, 0.6, 0.25)
@@ -18,7 +19,7 @@ is_projectile_weapon = true
 weapon_type = "Handgun"
 
 [node name="RBCollision" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_63ngr")
+shape = SubResource("CapsuleShape3D_63ngr")
 
 [node name="RayCast" type="RayCast3D" parent="RBCollision"]
 unique_name_in_owner = true

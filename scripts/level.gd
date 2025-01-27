@@ -11,10 +11,11 @@ extends Node3D
 var enemy_count = 0
 
 @onready var enemy_count_timer = %EnemyCountTimer
+@onready var ui = $UI
 
 func _ready() -> void:
 	enemy_count_timer.wait_time = 0.1
-	spawn_wave(2)
+	spawn_wave(0)
 
 # n will be squared
 func spawn_wave(n:int) -> void:
@@ -36,6 +37,8 @@ func spawn_wave(n:int) -> void:
 
 func _on_enemy_died():
 	enemy_count -= 1
+	GameState.score += 1
+	ui.update_score()
 	print(enemy_count, " enemies left")
 	if enemy_count <= 0:
 		enemy_count_timer.start()

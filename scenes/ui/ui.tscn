@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cm2m4cps6lnq"]
+[gd_scene load_steps=6 format=3 uid="uid://cm2m4cps6lnq"]
 
 [ext_resource type="Script" uid="uid://0mpka6bilbyr" path="res://scripts/ui.gd" id="1_u7n8c"]
 [ext_resource type="Texture2D" uid="uid://dxgqlnsjs360h" path="res://assets/vectors/health_bar_empty.svg" id="2_aac20"]
 [ext_resource type="Texture2D" uid="uid://be24yniigfesd" path="res://assets/vectors/health_bar_full.svg" id="3_g5kmx"]
+
+[sub_resource type="Gradient" id="Gradient_aac20"]
+offsets = PackedFloat32Array(0.236264, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.533333, 0.0666667, 0.133333, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g5kmx"]
+gradient = SubResource("Gradient_aac20")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
 
 [node name="UI" type="Control"]
 process_mode = 3
@@ -32,6 +42,15 @@ max_value = 1000.0
 texture_under = ExtResource("2_aac20")
 texture_progress = ExtResource("3_g5kmx")
 
+[node name="DamageIndicator" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_g5kmx")
+
 [node name="BlackScreen" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -49,10 +68,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -43.5
-offset_top = -11.5
-offset_right = 43.5
-offset_bottom = 11.5
+offset_left = -407.0
+offset_top = -240.0
+offset_right = 407.0
+offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0)
@@ -78,3 +97,17 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0)
 theme_override_font_sizes/font_size = 70
 text = "[ Press Enter or Start Button to restart ]"
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -377.0
+offset_top = -137.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = "Score: 0"

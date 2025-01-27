@@ -30,7 +30,7 @@ func _ready() -> void:
 	weapon.rotation.z += deg_to_rad(-90)
 
 	weapon.set_deferred("freeze", true)
-	#get_node("RBCollision/MeshInstance3D").surface_material_override(0.resource_local_to_scene = true)
+	get_node("RBCollision/MeshInstance3D").set_material_override(get_node("RBCollision/MeshInstance3D").get_material_override().duplicate()) 
 	
 func _physics_process(delta: float) -> void:
 	var look_direction = get_angle(
@@ -66,18 +66,19 @@ func enemy_process_explosion_damage(dmg):
 	process_damage(dmg)
 
 func process_damage(dmg):
-	$RBCollision/MeshInstance3D.material_override.emission = Color(100, 0 ,0)
-	$ResetHitColor.start()
-	max_health -= dmg
-	if (max_health <= 0): #dedge
-		# maybe make it explode here or something
-		drop_weapon()
-		reset_material_color()
-		# to prevent emitting multiple times if hit by multiple bullets
-		if is_alive:
-			died.emit()
-			is_alive = false
-		queue_free()
+	if !GameState.is_game_over:
+		$RBCollision/MeshInstance3D.material_override.emission = Color(100, 0 ,0)
+		$ResetHitColor.start()
+		max_health -= dmg
+		if (max_health <= 0): #dedge
+			# maybe make it explode here or something
+			drop_weapon()
+			reset_material_color()
+			# to prevent emitting multiple times if hit by multiple bullets
+			if is_alive:
+				died.emit()
+				is_alive = false
+			queue_free()
 
 func _on_hit_box_area_entered(area: Area3D) -> void:
 	if area.has_method("projectile_damage"):
