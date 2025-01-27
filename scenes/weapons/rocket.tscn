@@ -35,3 +35,5 @@ shape = SubResource("BoxShape3D_2hjgi")
 
 [node name="Anchor" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.2, 5.24537e-08)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]

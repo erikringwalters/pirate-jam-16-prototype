@@ -129,5 +129,3 @@ func take_hit(area:Node3D):
 		print("player health: ", GameState.player_health)
 		if GameState.player_health <= 0:
 			get_parent().get_node("UI").game_over()
-
-	
