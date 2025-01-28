@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bfcjpq4efming"]
+[gd_scene load_steps=11 format=3 uid="uid://bfcjpq4efming"]
 
 [ext_resource type="Script" uid="uid://bncu4llldqjrd" path="res://scripts/level.gd" id="1_m0bv2"]
 [ext_resource type="PackedScene" uid="uid://cqtfijlj7vwni" path="res://scenes/enemy/enemy.tscn" id="2_b7m21"]
@@ -8,8 +8,6 @@
 [ext_resource type="Script" uid="uid://dhjhidvuhk8dv" path="res://scripts/spawner.gd" id="6_ivku7"]
 [ext_resource type="PackedScene" uid="uid://bcay80aaxis1" path="res://scenes/boundaries/boundary.tscn" id="7_pe1ox"]
 [ext_resource type="PackedScene" uid="uid://dnab25acrgyoy" path="res://scenes/weapons/dagger.tscn" id="9_0fkkc"]
-[ext_resource type="PackedScene" uid="uid://ch5f82om4wwn7" path="res://scenes/weapons/handgun.tscn" id="10_wyi7n"]
-[ext_resource type="PackedScene" uid="uid://hjn3ta46v6nr" path="res://scenes/weapons/rocket.tscn" id="11_3rml5"]
 [ext_resource type="PackedScene" uid="uid://obopymb5flt6" path="res://scenes/weapons/sword.tscn" id="12_a5iu8"]
 
 [sub_resource type="Environment" id="Environment_h2yge"]
@@ -62,19 +60,32 @@ light_energy = 2.0
 shadow_enabled = true
 
 [node name="Dagger_PickupItem" parent="." instance=ExtResource("9_0fkkc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 6)
 
-[node name="Handgun_PickupItem" parent="." instance=ExtResource("10_wyi7n")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2, 1, 2)
+[node name="Dagger_PickupItem3" parent="." instance=ExtResource("9_0fkkc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 6)
 
-[node name="RocketLauncher_PickupItem" parent="." instance=ExtResource("11_3rml5")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 4)
+[node name="Dagger_PickupItem4" parent="." instance=ExtResource("9_0fkkc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 6)
+
+[node name="Dagger_PickupItem2" parent="." instance=ExtResource("9_0fkkc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 6)
 
 [node name="Shotgun_PickupItem" parent="." instance=ExtResource("3_pm6rs")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 4, 1, 3)
 
 [node name="Sword_PickupItem" parent="." instance=ExtResource("12_a5iu8")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4, 1, 3)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 6)
 
 [node name="EnemyCountTimer" type="Timer" parent="."]
 unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
+
+[node name="WaveTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="EnemyCountTimer" to="." method="_on_enemy_count_timer_timeout"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
