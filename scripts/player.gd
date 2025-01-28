@@ -9,7 +9,7 @@ signal health_changed
 @export_range(1.0, 10.0) var camera_stick_mult := 10.0
 
 @export_group("Movement")
-@export var move_speed := 16.0
+@export var move_speed := 12.0
 @export var acceleration := 50.0
 
 var _camera_input_direction := Vector2.ZERO
