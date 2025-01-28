@@ -15,10 +15,19 @@ var is_alive = true
 
 func _ready() -> void:
 	self.add_to_group("Enemy")
-	if randf() < 0.01:
+	var r = randf()
+	if r < 0.01:
 		weapon_name = "Rocket"
+	elif r >= 0.01 && r < 0.1:
+		weapon_name = "Shotgun"
+	elif r >= 0.1 && r < 0.5:
+		weapon_name = "Handgun"
+	elif r >= 0.5 && r < 0.75:
+		weapon_name = "Sword"
 	else:
-		weapon_name = Items.weapons.keys()[randi_range(0, Items.weapons.size() - 2)]
+		weapon_name = "Dagger"
+		# Random Weapon
+		#weapon_name = Items.weapons.keys()[randi_range(0, Items.weapons.size() - 2)]
 	connect("died", Callable(get_parent(), "_on_enemy_died"))
 	#print(weapon_name)
 	weapon = Items.weapons[str(weapon_name)]['weapon_scene'].instantiate()
