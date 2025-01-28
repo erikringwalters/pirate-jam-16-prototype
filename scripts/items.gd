@@ -12,7 +12,6 @@ var common_base_cooldown := 1.5
 		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
-		"wave": [1, 3, 2, 3, 2, 4]
 	}, 
 	"Sword" : {
 		"path":"res://assets/weapons/Sword.fbx",
@@ -22,7 +21,6 @@ var common_base_cooldown := 1.5
 		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
-		"wave": [0, 0, 1, 3, 2, 4]
 	}, 
 	"Handgun" : {
 		"path":"res://assets/weapons/Handgun.fbx",
@@ -32,7 +30,6 @@ var common_base_cooldown := 1.5
 		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
-		"wave": [0, 1, 1, 3, 4, 4]
 	}, 
 	"Shotgun" : {
 		"path":"res://assets/weapons/Shotgun.fbx",
@@ -42,7 +39,6 @@ var common_base_cooldown := 1.5
 		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
-		"wave": [0, 0, 0, 0, 1, 3]
 	}, 
 	"Rocket" : {
 		"path":"res://assets/weapons/Rocket.fbx",
@@ -52,7 +48,6 @@ var common_base_cooldown := 1.5
 		"base_cooldown": 2.0,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
-		"wave": [0, 0, 0, 0, 0, 1]
 	}
 }
 

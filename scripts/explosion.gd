@@ -49,7 +49,7 @@ func explosion():
 		if (j.has_method('enemy_process_explosion_damage') and fired_by_player):
 			j.enemy_process_explosion_damage(damage)
 		if (j.has_method('player_process_explosion_damage') and !fired_by_player):
-			j.player_process_explosion_damage(damage)	
+			j.player_process_explosion_damage(damage)
 		
 func explosion_damage() -> float:
 	return damage

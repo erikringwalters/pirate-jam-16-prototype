@@ -69,7 +69,7 @@ one_shot = true
 
 [node name="WaveTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 
 [connection signal="timeout" from="EnemyCountTimer" to="." method="_on_enemy_count_timer_timeout"]

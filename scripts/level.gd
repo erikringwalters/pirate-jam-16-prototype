@@ -1,5 +1,7 @@
 extends Node3D
 
+signal wave_finished
+
 @export var enemy_scene : PackedScene
 @export var weapon_scene : PackedScene
 
@@ -7,7 +9,7 @@ extends Node3D
 @export var y_offset : float = 1.0
 @export var spread_offset : float = 5
 @export var wave_n := [1,2,2,3,3,4]
-@export var wave_heal_amount := 250
+@export var wave_heal_amount := 100
 
 var enemies_remaining = 0
 var max_known_wave_count = wave_n.size() - 1
@@ -20,10 +22,10 @@ var max_known_wave_count = wave_n.size() - 1
 func _ready() -> void:
 	enemy_count_timer.wait_time = 0.1
 	spawn_wave(wave_n[get_safe_wave_count()])
+	connect("wave_finished", Callable(ui, "_on_wave_finished"))
 
 # n will be squared
 func spawn_wave(n:int) -> void:
-	get_current_wave_weapons()
 	var x_offset = dist_from_center if GameState.current_wave % 2 == 1 else -dist_from_center
 	var z_offset = dist_from_center if GameState.current_wave % 2 == 0 else -dist_from_center
 	for i in n:
@@ -37,12 +39,6 @@ func spawn_wave(n:int) -> void:
 				y_offset, 
 				j * spread_offset + z_offset
 			)
-
-func get_current_wave_weapons():
-	var weapon_counts := []
-	for key in Items.weapons.keys():
-		weapon_counts.push_back(Items.weapons[key].wave[get_safe_wave_count()])
-	print(weapon_counts)
 
 func _on_enemy_died():
 	enemies_remaining -= 1
@@ -60,12 +56,13 @@ func _on_enemy_count_timer_timeout() -> void:
 
 func wave_over():
 	print("wave over")
-	player.heal(250)
+	GameState.current_wave += 1
+	wave_finished.emit()
+	player.heal(wave_heal_amount)
 	wave_timer.start()
 
 func _on_wave_timer_timeout() -> void:
 	print("new wave starting")
-	GameState.current_wave += 1
 	spawn_wave(wave_n[get_safe_wave_count()])
 
 func get_safe_wave_count() -> int:
