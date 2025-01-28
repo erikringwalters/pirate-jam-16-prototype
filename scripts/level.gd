@@ -25,10 +25,6 @@ func spawn_wave(n:int) -> void:
 			var enemy = enemy_scene.instantiate()
 			add_child(enemy)
 			enemies_remaining += 1
-			# Spawn weapon alone
-			#var weapon = weapon_scene.instantiate()
-			#add_child(weapon)
-			#enemy.global_transform.origin = Vector3(
 			enemy.global_transform.origin = Vector3(
 				i * spread_offset + x_offset,
 				y_offset, 
