@@ -40,7 +40,6 @@ func spawn_wave(n:int, wave:int) -> void:
 func get_current_wave_weapons(current_wave:int):
 	var weapon_counts := []
 	for key in Items.weapons.keys():
-		# TODO: check why later waves don't spawn (~7+)
 		weapon_counts.push_back(Items.weapons[key].wave[get_safe_wave_count()])
 	print(weapon_counts)
 

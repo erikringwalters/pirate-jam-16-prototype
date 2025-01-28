@@ -15,11 +15,12 @@ albedo_color = Color(0, 0.696657, 0.366257, 1)
 material = SubResource("StandardMaterial3D_ud4yb")
 radius = 0.15
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_n5jhk"]
-size = Vector3(0.15, 1, 0.15)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j34lm"]
+radius = 0.17
+height = 0.9
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j34lm"]
-size = Vector3(0.25, 0.205, 0.895)
+size = Vector3(0.25, 0.2, 0.2)
 
 [node name="Dagger_PickupItem" type="RigidBody3D" groups=["GroundCollision", "Pickup"]]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, 1, -1, 4.37114e-08, -4.37114e-08, 0, 0, 0)
@@ -42,7 +43,7 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -4.29283e-09, -0.398208, 1.31
 [node name="HitBox" type="Area3D" parent="RBCollision"]
 
 [node name="HitBoxCollision" type="CollisionShape3D" parent="RBCollision/HitBox"]
-shape = SubResource("BoxShape3D_n5jhk")
+shape = SubResource("CapsuleShape3D_j34lm")
 
 [node name="Anchor" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18557e-08, 0, -0.8)
@@ -51,7 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18557e-08, 0, -0.8)
 script = ExtResource("3_n5jhk")
 
 [node name="MeleePlayerCollision" type="CollisionShape3D" parent="MeleePlayerArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.59267e-09, 3.31886e-16, 0.1737)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63349e-08, 7.14023e-16, 0.3737)
 shape = SubResource("BoxShape3D_j34lm")
 
 [connection signal="body_entered" from="MeleePlayerArea" to="MeleePlayerArea" method="_on_body_entered"]
