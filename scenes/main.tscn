@@ -30,6 +30,7 @@ script = ExtResource("1_0wfyh")
 stream = ExtResource("2_jyhfs")
 attenuation_model = 3
 autoplay = true
+parameters/looping = true
 
 [node name="Level" parent="." instance=ExtResource("2_sugp2")]
 

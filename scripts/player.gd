@@ -97,6 +97,10 @@ func _on_pickup_area_entered(area: Node3D) -> void:
 #func _on_hit_box_area_entered(area: Area3D) -> void:
 	#take_hit(area)
 
+func full_heal():
+	GameState.player_health = GameState.max_health
+	health_changed.emit()
+
 func player_process_explosion_damage(damage):
 	GameState.player_health -= damage/3
 	health_changed.emit()

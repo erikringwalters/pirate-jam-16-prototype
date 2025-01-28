@@ -30,6 +30,7 @@ weapon_scene = ExtResource("3_pm6rs")
 environment = SubResource("Environment_h2yge")
 
 [node name="Player" parent="." instance=ExtResource("5_x4oov")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Spawner" type="Node3D" parent="."]
