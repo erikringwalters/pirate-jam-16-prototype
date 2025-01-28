@@ -15,8 +15,10 @@ var is_alive = true
 
 func _ready() -> void:
 	self.add_to_group("Enemy")
-	#weapon_name = Items.weapons.keys()[randi_range(0, Items.weapons.size() - 1)]
-	weapon_name = "Shotgun"
+	if randf() < 0.01:
+		weapon_name = "Rocket"
+	else:
+		weapon_name = Items.weapons.keys()[randi_range(0, Items.weapons.size() - 2)]
 	connect("died", Callable(get_parent(), "_on_enemy_died"))
 	#print(weapon_name)
 	weapon = Items.weapons[str(weapon_name)]['weapon_scene'].instantiate()

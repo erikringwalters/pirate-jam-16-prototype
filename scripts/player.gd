@@ -101,6 +101,10 @@ func full_heal():
 	GameState.player_health = GameState.max_health
 	health_changed.emit()
 
+func heal(amount):
+	GameState.player_health = clamp(GameState.player_health + amount, 0, GameState.max_health)
+	health_changed.emit()
+
 func player_process_explosion_damage(damage):
 	GameState.player_health -= damage/3
 	health_changed.emit()

@@ -7,6 +7,7 @@ extends Node3D
 @export var y_offset : float = 1.0
 @export var spread_offset : float = 5
 @export var wave_n := [1,2,2,3,3,4]
+@export var wave_heal_amount := 250
 
 var enemies_remaining = 0
 var max_known_wave_count = wave_n.size() - 1
@@ -59,7 +60,7 @@ func _on_enemy_count_timer_timeout() -> void:
 
 func wave_over():
 	print("wave over")
-	player.full_heal()
+	player.heal(250)
 	wave_timer.start()
 
 func _on_wave_timer_timeout() -> void:

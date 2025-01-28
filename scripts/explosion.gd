@@ -10,7 +10,7 @@ func _ready() -> void:
 	$Lifetime.start()
 
 func _physics_process(_delta: float) -> void:
-	const rate = 1.1
+	const rate = 1.05
 	get_node('MeshInstance3D').mesh.radius *= rate
 	get_node('MeshInstance3D').mesh.height = get_node('MeshInstance3D').mesh.radius*2
 	

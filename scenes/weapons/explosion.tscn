@@ -6,9 +6,10 @@
 radius = 2.847
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmdyk"]
-albedo_color = Color(0.696164, 0.678753, 0, 1)
+transparency = 1
+albedo_color = Color(0.890196, 0.576471, 0, 0.0862745)
 emission_enabled = true
-emission = Color(0.68276, 0.635471, 0.372632, 1)
+emission = Color(0.85337, 0.558816, 0, 1)
 emission_energy_multiplier = 2.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_4u5ba"]
