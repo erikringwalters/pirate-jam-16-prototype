@@ -8,7 +8,7 @@ signal wave_finished
 @export var dist_from_center : float = 15.0
 @export var y_offset : float = 1.0
 @export var spread_offset : float = 5
-@export var wave_n := [1,2,2,3,3,4]
+@export var wave_n := [1,2,2,3,3,4,5]
 @export var wave_heal_amount := 100
 
 var enemies_remaining = 0

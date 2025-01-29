@@ -88,6 +88,6 @@ transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, 0.5, -5.
 mesh = SubResource("CylinderMesh_7mycd")
 skeleton = NodePath("../..")
 
-[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_pickup_area_entered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="body_entered" from="HitBox" to="." method="_on_pickup_body_entered"]
