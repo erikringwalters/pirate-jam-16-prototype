@@ -39,8 +39,8 @@ func _ready() -> void:
 	weapon.rotation.x += deg_to_rad(90)
 	weapon.rotation.y += deg_to_rad(90)
 	weapon.rotation.z += deg_to_rad(-90)
-
 	weapon.set_deferred("freeze", true)
+	weapon.get_node("RBCollision").set_deferred("disabled", true)
 	get_node("RBCollision/MeshInstance3D").set_material_override(get_node("RBCollision/MeshInstance3D").get_material_override().duplicate()) 
 	
 func _physics_process(delta: float) -> void:
@@ -102,10 +102,10 @@ func _on_hit_box_area_entered(area: Area3D) -> void:
 		area.queue_free()
 
 func drop_weapon() -> void:
+	weapon.get_node("RBCollision").set_deferred("disabled", false)
 	weapon.drop()
 	weapon.reparent(get_parent(), true)
 	weapon.set_collision_layers(false, false)
-	weapon.set_deferred("disabled", false)
 	weapon.set_deferred("freeze", false)
 	
 	
