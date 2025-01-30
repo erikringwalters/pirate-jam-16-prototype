@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://rs3ujb8v25hv"]
+
+[ext_resource type="PackedScene" uid="uid://jr0aycl8oglv" path="res://assets/birb/tail.glb" id="1_u81di"]
+[ext_resource type="Material" uid="uid://tkjn3md21ick" path="res://materials/crow.tres" id="2_ig3rk"]
+
+[node name="tail" instance=ExtResource("1_u81di")]
+
+[node name="Tail" parent="." index="0"]
+material_override = ExtResource("2_ig3rk")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcyswtdf1ose6"]
+
+[ext_resource type="PackedScene" uid="uid://80e5p3ar0544" path="res://assets/birb/wingL-flat.glb" id="1_5qhe2"]
+[ext_resource type="Material" uid="uid://tkjn3md21ick" path="res://materials/crow.tres" id="2_4lol3"]
+
+[node name="wingL-flat" instance=ExtResource("1_5qhe2")]
+
+[node name="Plane" parent="." index="0"]
+material_override = ExtResource("2_4lol3")

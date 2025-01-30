@@ -1,0 +1,20 @@
+[gd_scene load_steps=7 format=3 uid="uid://406108lh7eh8"]
+
+[ext_resource type="PackedScene" uid="uid://ddu8728830mxe" path="res://assets/birb/body.glb" id="1_f43j4"]
+[ext_resource type="Material" uid="uid://tkjn3md21ick" path="res://materials/crow.tres" id="2_k038i"]
+[ext_resource type="Script" uid="uid://daig6lrho07g1" path="res://scripts/birb.gd" id="2_tkrob"]
+[ext_resource type="PackedScene" uid="uid://dcyswtdf1ose6" path="res://scenes/birb/wing_l_flat.tscn" id="3_j8tfs"]
+[ext_resource type="PackedScene" uid="uid://c3o8kpjgoqd85" path="res://scenes/birb/wing_r_flat.tscn" id="4_tkrob"]
+[ext_resource type="PackedScene" uid="uid://rs3ujb8v25hv" path="res://scenes/birb/tail.tscn" id="5_ywb53"]
+
+[node name="Birb" instance=ExtResource("1_f43j4")]
+script = ExtResource("2_tkrob")
+
+[node name="Body" parent="." index="0"]
+material_override = ExtResource("2_k038i")
+
+[node name="wingL-flat" parent="." index="1" instance=ExtResource("3_j8tfs")]
+
+[node name="wingR-flat" parent="." index="2" instance=ExtResource("4_tkrob")]
+
+[node name="tail" parent="." index="3" instance=ExtResource("5_ywb53")]
