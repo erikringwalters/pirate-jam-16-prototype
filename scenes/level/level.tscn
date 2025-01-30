@@ -16,17 +16,20 @@
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1
-background_color = Color(1, 1, 1, 1)
-background_energy_multiplier = 0.0
+background_color = Color(0.979405, 0.979405, 0.979405, 1)
+background_energy_multiplier = 0.4
 ambient_light_source = 2
-ambient_light_color = Color(0.546974, 0.53254, 0.511588, 1)
+ambient_light_color = Color(0.936698, 0.96583, 1, 1)
 ambient_light_energy = 0.25
 glow_enabled = true
+glow_bloom = 0.3
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(1, 1, 1, 1)
-fog_light_energy = 0.5
+fog_light_energy = 0.4
 fog_density = 1.0
+fog_depth_begin = 0.0
+fog_depth_end = 80.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pe1ox"]
 albedo_color = Color(0.666315, 0.578244, 0.421775, 1)

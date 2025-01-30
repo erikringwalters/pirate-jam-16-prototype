@@ -2,7 +2,7 @@ extends Area3D
 
 var damage : float = 500
 var items_in_radius : Array
-var explosion_force : int = 5
+var explosion_force : int = 2.5
 
 var fired_by_player = false
 
