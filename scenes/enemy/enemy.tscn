@@ -27,7 +27,7 @@ height = 2.1
 [node name="Enemy" type="RigidBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-mass = 0.01
+mass = 0.001
 physics_material_override = ExtResource("1_tjssy")
 script = ExtResource("1_4a83h")
 
