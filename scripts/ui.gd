@@ -9,10 +9,12 @@ extends Control
 @onready var damage_indicator := $DamageIndicator
 @onready var wave_finished_timer := $WaveFinishedTimer
 @onready var wave_count_timer := $WaveCountTimer
+@onready var heal_label := $HealLabel
 
 var screen_size:Vector2
 var game_over_fade_time := 0.5
-var damage_fade_speed := 0.1
+var damage_fade_speed := 0.05
+var heal_label_move_time := 0.5
 
 func _ready() -> void:
 	screen_size = get_viewport().get_visible_rect().size
@@ -30,7 +32,10 @@ func game_over() -> Tween:
 	var tween = get_tree().create_tween()
 	tween.parallel().tween_property(black_screen, "color:a", 0.9, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
 	tween.parallel().tween_property(game_over_label, "theme_override_colors/font_color:a", 1.0, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
+	tween.parallel().tween_property(game_over_label, "theme_override_colors/font_outline_color:a", 1.0, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
 	tween.parallel().tween_property(new_game_label, "theme_override_colors/font_color:a", 1.0, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
+	tween.parallel().tween_property(new_game_label, "theme_override_colors/font_outline_color:a", 1.0, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
+
 	return tween
 
 func transform_health_bar():
@@ -39,11 +44,14 @@ func transform_health_bar():
 
 func transform_game_over():
 	#game_over_label.position.y = screen_size.y/10
-	new_game_label.position.y = screen_size.y*3/4
+	new_game_label.position.y = screen_size.y*0.6
 
-func _on_health_changed():
+func _on_health_changed(is_healing:bool) -> void:
 	health_bar.value = GameState.player_health
-	flash_damage()
+	if is_healing:
+		show_heal_label()
+	else:
+		flash_damage()
 
 func update_score():
 	score_label.text = str("Score: ", GameState.score)
@@ -59,12 +67,14 @@ func show_wave_count() -> Tween:
 	var tween = get_tree().create_tween()
 	tween.parallel().tween_property(black_screen, "color:a", 0.4, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
 	tween.parallel().tween_property(wave_count_label, "theme_override_colors/font_color:a", 1.0, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
+	tween.parallel().tween_property(wave_count_label, "theme_override_colors/font_outline_color:a", 1.0, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
 	return tween
 
 func hide_wave_count() -> Tween:
 	var tween = get_tree().create_tween()
 	tween.parallel().tween_property(black_screen, "color:a", 0.0, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
 	tween.parallel().tween_property(wave_count_label, "theme_override_colors/font_color:a", 0.0, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
+	tween.parallel().tween_property(wave_count_label, "theme_override_colors/font_outline_color:a", 0.0, game_over_fade_time).set_ease(Tween.EASE_IN_OUT)
 	return tween
 
 func _on_wave_finished_timer_timeout() -> void:
@@ -73,3 +83,24 @@ func _on_wave_finished_timer_timeout() -> void:
 
 func _on_wave_count_timer_timeout() -> void:
 	hide_wave_count()
+
+func show_heal_label() -> void:
+	heal_label.position = Vector2(health_bar.position.x, health_bar.position.y + 200)
+	heal_label.show()
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(heal_label, "theme_override_colors/font_outline_color:a", 1.0, 0.01).set_ease(Tween.EASE_IN_OUT)
+	tween.parallel().tween_property(heal_label, "theme_override_colors/font_color:a", 1.0, 0.01).set_ease(Tween.EASE_IN_OUT)
+	await move_heal_label().finished
+	await hide_heal_label().finished
+	heal_label.hide()
+
+func move_heal_label() -> Tween:
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(heal_label, "position:y", health_bar.position.y - 250, heal_label_move_time).set_ease(Tween.EASE_IN_OUT)
+	return tween
+
+func hide_heal_label() -> Tween:
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(heal_label, "theme_override_colors/font_outline_color:a", 0.0, heal_label_move_time).set_ease(Tween.EASE_IN_OUT)
+	tween.parallel().tween_property(heal_label, "theme_override_colors/font_color:a", 0.0, heal_label_move_time).set_ease(Tween.EASE_IN_OUT)
+	return tween

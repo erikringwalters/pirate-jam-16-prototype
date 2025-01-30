@@ -99,22 +99,22 @@ func _on_pickup_area_entered(area: Node3D) -> void:
 
 func full_heal():
 	GameState.player_health = GameState.max_health
-	health_changed.emit()
+	health_changed.emit(true)
 
 func heal(amount):
 	GameState.player_health = clamp(GameState.player_health + amount, 0, GameState.max_health)
-	health_changed.emit()
+	health_changed.emit(true)
 
 func player_process_explosion_damage(damage):
 	GameState.player_health -= damage/3
-	health_changed.emit()
+	health_changed.emit(false)
 	print("player splosion")
 	if GameState.player_health <= 0:
 		get_parent().get_node("UI").game_over()
 
 func player_process_melee_damage(dmg):
 	GameState.player_health -= dmg
-	health_changed.emit()
+	health_changed.emit(false)
 	print("player health: ", GameState.player_health)
 	if GameState.player_health <= 0:
 		get_parent().get_node("UI").game_over()
@@ -133,7 +133,7 @@ func take_hit(area:Node3D):
 	if area.is_in_group("Projectile"):
 		if (!area.fired_by_player):
 			GameState.player_health -= area.projectile_damage() if area.has_method("projectile_damage") else 0
-			health_changed.emit()
+			health_changed.emit(false)
 			handle_projectile_despawn(area)
 			print("player health: ", GameState.player_health)
 			if GameState.player_health <= 0:
