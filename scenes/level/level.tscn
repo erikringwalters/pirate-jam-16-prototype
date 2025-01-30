@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfcjpq4efming"]
+[gd_scene load_steps=19 format=3 uid="uid://bfcjpq4efming"]
 
 [ext_resource type="Script" uid="uid://bncu4llldqjrd" path="res://scripts/level.gd" id="1_m0bv2"]
 [ext_resource type="PackedScene" uid="uid://cqtfijlj7vwni" path="res://scenes/enemy/enemy.tscn" id="2_b7m21"]
@@ -8,15 +8,44 @@
 [ext_resource type="Script" uid="uid://dhjhidvuhk8dv" path="res://scripts/spawner.gd" id="6_ivku7"]
 [ext_resource type="PackedScene" uid="uid://bcay80aaxis1" path="res://scenes/boundaries/boundary.tscn" id="7_pe1ox"]
 [ext_resource type="PackedScene" uid="uid://dnab25acrgyoy" path="res://scenes/weapons/dagger.tscn" id="9_0fkkc"]
+[ext_resource type="Texture2D" uid="uid://djdkut54stvqp" path="res://assets/Grass001_1K-JPG_Color.jpg" id="9_tf2q7"]
+[ext_resource type="Texture2D" uid="uid://dm8ynytv0nlf0" path="res://assets/Grass001_1K-JPG_AmbientOcclusion.jpg" id="10_b7m21"]
+[ext_resource type="Texture2D" uid="uid://cwh1ea7c3ee1b" path="res://assets/Grass001_1K-JPG_NormalGL.jpg" id="10_pe1ox"]
+[ext_resource type="Texture2D" uid="uid://dtrqkdcoovdim" path="res://assets/fence.png" id="11_pe1ox"]
+[ext_resource type="PackedScene" uid="uid://c3r34lobnlnxv" path="res://assets/TombStone.fbx" id="14_vrc4q"]
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1
-background_color = Color(0.138034, 0.138034, 0.138034, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.533333, 0.533333, 0.533333, 1)
 glow_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.304462, 0.304462, 0.304462, 1)
+fog_light_color = Color(0.0509804, 0.0941176, 0.172549, 1)
+fog_light_energy = 0.8
+fog_density = 0.0876
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pe1ox"]
+albedo_texture = ExtResource("9_tf2q7")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("10_pe1ox")
+ao_enabled = true
+ao_texture = ExtResource("10_b7m21")
+uv1_scale = Vector3(40, 40, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pe1ox"]
+material = SubResource("StandardMaterial3D_pe1ox")
+size = Vector3(120, 1, 120)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pm6rs"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("11_pe1ox")
+albedo_texture_force_srgb = true
+uv1_scale = Vector3(40, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_vrc4q"]
+material = SubResource("StandardMaterial3D_pm6rs")
+size = Vector2(80, 1)
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_m0bv2")
@@ -40,23 +69,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
 
 [node name="FloorBoundary2" parent="." instance=ExtResource("7_pe1ox")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 85, 0)
+visible = false
 
 [node name="WallBoundary" parent="." instance=ExtResource("7_pe1ox")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 40, -45)
+visible = false
 
 [node name="WallBoundary3" parent="." instance=ExtResource("7_pe1ox")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 40, 45)
+visible = false
 
 [node name="WallBoundary2" parent="." instance=ExtResource("7_pe1ox")]
 transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 45, 40, 0)
+visible = false
 
 [node name="WallBoundary4" parent="." instance=ExtResource("7_pe1ox")]
 transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, -45, 40, 0)
+visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0, 0.866025, 0.5, 3.55271e-15, -0.5, 0.866025, 1, 1.77636e-15, -3.07674e-15, 0, 30, 0)
-light_color = Color(0.938865, 0.90377, 0.865132, 1)
-light_energy = 2.0
+light_color = Color(0.468145, 0.617551, 0.543008, 1)
+light_energy = 13.54
 shadow_enabled = true
 
 [node name="Dagger_PickupItem3" parent="." instance=ExtResource("9_0fkkc")]
@@ -71,6 +105,407 @@ one_shot = true
 unique_name_in_owner = true
 wait_time = 5.0
 one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.493307, 0)
+mesh = SubResource("BoxMesh_pe1ox")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -40.0032, 0.486669, 0.0492886)
+mesh = SubResource("QuadMesh_vrc4q")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 40.003, 0.487, 0.049)
+mesh = SubResource("QuadMesh_vrc4q")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.487, 40.046)
+mesh = SubResource("QuadMesh_vrc4q")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0.487, -40.046)
+mesh = SubResource("QuadMesh_vrc4q")
+
+[node name="TombStone" parent="." instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.999034, 0, 0.0439507, 0, 1, 0, -0.0439507, 0, 0.999034, 14.8892, 0.37575, 8.11857)
+
+[node name="TombStone3" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 0)
+
+[node name="TombStone4" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 0)
+
+[node name="TombStone5" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 0)
+
+[node name="TombStone6" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.993397, 0, 0.114729, 0, 1, 0, -0.114729, 0, 0.993397, -1.91625, -0.481504, 4.24248)
+
+[node name="TombStone7" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.993397, 0, 0.114729, 0, 1, 0, -0.114729, 0, 0.993397, -0.250678, -0.252793, 3.2692)
+
+[node name="TombStone8" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.993397, 0, 0.114729, 0, 1, 0, -0.114729, 0, 0.993397, 1.05507, -0.252793, 3.1184)
+
+[node name="TombStone9" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.993397, 0, 0.114729, 0, 1, 0, -0.114729, 0, 0.993397, 2.27588, -0.481504, 3.12365)
+
+[node name="TombStone10" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.993397, 0, 0.114729, 0, 1, 0, -0.114729, 0, 0.993397, 3.95331, -0.252793, 2.78368)
+
+[node name="TombStone11" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.02199)
+
+[node name="TombStone12" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.624048, 0.00943177, 0.781329, -0.173275, 0.976702, 0.126604, -0.761932, -0.214392, 0.611143, 1.43699, -0.107696, 7.22161)
+
+[node name="TombStone13" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.78022, 0, 6.56687)
+
+[node name="TombStone14" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15243, 0, 7.91559)
+
+[node name="TombStone15" parent="TombStone" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.72524, 0, 5.94139)
+
+[node name="TombStone2" parent="." instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.999124, 0, 0.0418582, 0, 1, 0, -0.0418582, 0, 0.999124, -13.6739, 0.349678, 17.4743)
+
+[node name="TombStone3" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.934832, 0, 0.355091, 0, 1, 0, -0.355091, 0, 0.934832, 2.88913, 0, -0.307886)
+
+[node name="TombStone4" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.934545, 0.00777167, 0.35576, -0.0731359, 0.982613, 0.170655, -0.348248, -0.185504, 0.918865, 4.21196, 0, -0.447815)
+
+[node name="TombStone5" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.934832, 0, 0.355091, 0, 1, 0, -0.355091, 0, 0.934832, 5.61651, 0, -1.34386)
+
+[node name="TombStone6" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0232048, 0, 3.75036)
+
+[node name="TombStone7" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, -0.315077, 3.1965)
+
+[node name="TombStone8" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 3.1965)
+
+[node name="TombStone9" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 3.1965)
+
+[node name="TombStone10" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.995054, 0, 0.0993371, 0, 1, 0, -0.0993371, 0, 0.995054, 5.7116, 0, 2.38735)
+
+[node name="TombStone11" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0211544, -0.201255, 7.52693)
+
+[node name="TombStone13" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 7.02199)
+
+[node name="TombStone14" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17059, -0.201255, 7.52692)
+
+[node name="TombStone15" parent="TombStone2" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.65654, -0.201255, 7.52692)
+
+[node name="TombStone3" parent="." instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6739, 0.349678, -27.0172)
+
+[node name="TombStone2" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.881295, 0.472566, 0, -0.472566, 0.881295, 0, 0, 0, 1, 1.09507, -0.264141, 0)
+
+[node name="TombStone3" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.921077, 0, 0.389381, 0, 1, 0, -0.389381, 0, 0.921077, 2.7602, 0, -0.831245)
+
+[node name="TombStone4" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 0)
+
+[node name="TombStone5" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 0)
+
+[node name="TombStone6" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.1965)
+
+[node name="TombStone7" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, -0.426791, 3.1965)
+
+[node name="TombStone8" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 3.1965)
+
+[node name="TombStone9" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 3.1965)
+
+[node name="TombStone10" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 3.55224)
+
+[node name="TombStone11" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.999866, -0.0163879, 0, 0.0163879, 0.999866, 0, 0, 0, 1, -0.378594, -0.0804307, 7.02199)
+
+[node name="TombStone12" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.999866, -0.0163879, 0, 0.0163879, 0.999866, 0, 0, 0, 1, 1.06698, -0.0567376, 7.30755)
+
+[node name="TombStone13" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.999866, -0.0163879, 0, 0.0163879, 0.999866, 0, 0, 0, 1, 2.38123, -0.0351969, 7.02199)
+
+[node name="TombStone14" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.788698, 0, 0.614781, 0, 1, 0, -0.614781, 0, 0.788698, 3.20962, 0, 8.77806)
+
+[node name="TombStone15" parent="TombStone3" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.788698, 0, 0.614781, 0, 1, 0, -0.614781, 0, 0.788698, 5.52071, 0, 7.86452)
+
+[node name="TombStone4" parent="." instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.986609, 0, -0.163102, 0, 1, 0, 0.163102, 0, 0.986609, 13.3036, 0.349678, -29.5278)
+
+[node name="TombStone2" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 0)
+
+[node name="TombStone3" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.65755, 0.0415001, -0.620903)
+
+[node name="TombStone4" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 0)
+
+[node name="TombStone5" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.87256, 0, -0.0322132)
+
+[node name="TombStone6" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.1965)
+
+[node name="TombStone7" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.997831, 0.0645117, -0.0131223, -0.0645117, 0.918453, -0.390233, -0.0131223, 0.390233, 0.920623, 1.44577, 0, 3.1965)
+
+[node name="TombStone8" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 3.1965)
+
+[node name="TombStone9" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 3.1965)
+
+[node name="TombStone10" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 3.1965)
+
+[node name="TombStone11" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.02199)
+
+[node name="TombStone12" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.989066, -0.0741293, -0.12749, 0.0719445, 0.997173, -0.0216638, 0.128735, 0.0122547, 0.991603, 1.4629, -0.134885, 6.75602)
+
+[node name="TombStone14" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.991736, 0, -0.128294, 0, 1, 0, 0.128294, 0, 0.991736, 4.18618, 0, 7.10831)
+
+[node name="TombStone15" parent="TombStone4" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.991736, 0, -0.128294, 0, 1, 0, 0.128294, 0, 0.991736, 5.65986, 0, 7.29895)
+
+[node name="TombStone5" parent="." instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.650907, 0, -0.759158, 0, 1, 0, 0.759158, 0, 0.650907, 23.524, 0.349678, -12.0427)
+
+[node name="TombStone2" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 0)
+
+[node name="TombStone3" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.963467, 0, 0.267827, 0, 1, 0, -0.267827, 0, 0.963467, 3.41024, 0, -0.35337)
+
+[node name="TombStone4" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.963467, 0, 0.267827, 0, 1, 0, -0.267827, 0, 0.963467, 4.78949, 0, -0.736776)
+
+[node name="TombStone5" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.963467, 0, 0.267827, 0, 1, 0, -0.267827, 0, 0.963467, 6.22116, 0, -1.13476)
+
+[node name="TombStone6" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.1965)
+
+[node name="TombStone7" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 3.1965)
+
+[node name="TombStone8" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 3.1965)
+
+[node name="TombStone9" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.999986, 0.00522827, -0.000388879, -0.00522828, 0.988982, -0.147941, -0.000388887, 0.147941, 0.988996, 5.06836, -0.43721, 3.16581)
+
+[node name="TombStone10" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.999986, 0.00522827, -0.000388879, -0.00522828, 0.988982, -0.147941, -0.000388887, 0.147941, 0.988996, 6.55429, -0.444979, 3.16523)
+
+[node name="TombStone11" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.995794, 0.0899462, -0.0174596, -0.0916234, 0.976359, -0.195777, -0.00056253, 0.196553, 0.980493, -1.2853, 0, 7.06741)
+
+[node name="TombStone12" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 7.02199)
+
+[node name="TombStone13" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 7.02199)
+
+[node name="TombStone15" parent="TombStone5" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 7.02199)
+
+[node name="TombStone6" parent="." instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.993611, 0, 0.112856, 0, 1, 0, -0.112856, 0, 0.993611, 4.25553, 0.349678, -14.4338)
+
+[node name="TombStone2" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 0)
+
+[node name="TombStone3" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 0)
+
+[node name="TombStone4" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.998921, 0.0464417, -0.000122547, -0.0464417, 0.998907, -0.00527494, -0.000122555, 0.00527494, 0.999986, 4.25742, -0.313207, -0.567509)
+
+[node name="TombStone5" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.998921, 0.0464417, -0.000122547, -0.0464417, 0.998907, -0.00527494, -0.000122555, 0.00527494, 0.999986, 5.74177, -0.382217, -0.567691)
+
+[node name="TombStone6" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13075, 0, 3.06807)
+
+[node name="TombStone7" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.99959, -0.0283847, 0.00360468, 0.0283847, 0.967854, -0.249905, 0.00360467, 0.249905, 0.968263, 0.31502, -0.306531, 3.06807)
+
+[node name="TombStone8" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 3.1965)
+
+[node name="TombStone9" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 3.1965)
+
+[node name="TombStone10" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.998921, 0.0464417, -0.000122547, -0.0464417, 0.998907, -0.00527494, -0.000122555, 0.00527494, 0.999986, 5.74138, -0.399078, 2.62876)
+
+[node name="TombStone11" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.02199)
+
+[node name="TombStone12" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 7.02199)
+
+[node name="TombStone13" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 7.02199)
+
+[node name="TombStone14" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 7.02199)
+
+[node name="TombStone15" parent="TombStone6" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.990772, 0.133714, 0.0221505, -0.135534, 0.97636, 0.168377, 0.000887565, -0.169826, 0.985474, 5.6777, -0.490871, 7.02198)
+
+[node name="TombStone7" parent="." instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.322629, 0, 0.946525, 0, 1, 0, -0.946525, 0, 0.322629, -32.8973, 0.349678, -3.54606)
+
+[node name="TombStone2" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 0)
+
+[node name="TombStone3" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.965586, 0, 0.260083, 0, 1, 0, -0.260083, 0, 0.965586, 2.48182, 0, -0.702812)
+
+[node name="TombStone4" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.965586, 0, 0.260083, 0, 1, 0, -0.260083, 0, 0.965586, 3.8641, 0, -1.07514)
+
+[node name="TombStone5" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.17309, 0, -0.168858)
+
+[node name="TombStone6" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.996455, 0, 0.08413, 0, 1, 0, -0.08413, 0, 0.996455, -1.47916, 0, 3.05164)
+
+[node name="TombStone7" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.996455, 0, 0.08413, 0, 1, 0, -0.08413, 0, 0.996455, -0.0385227, 0, 2.93001)
+
+[node name="TombStone8" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54784, -0.403668, 2.57349)
+
+[node name="TombStone9" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.977562, -0.210507, 0.00764796, 0.210507, 0.974956, -0.0717525, 0.00764796, 0.0717525, 0.997393, 4.20699, -0.195201, 3.24121)
+
+[node name="TombStone10" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 3.1965)
+
+[node name="TombStone11" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.02199)
+
+[node name="TombStone13" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 7.02199)
+
+[node name="TombStone14" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.997625, -0.048575, -0.0488271, 0.0134488, 0.832677, -0.553596, 0.0675481, 0.551624, 0.831353, 4.19175, -0.150971, 7.02199)
+
+[node name="TombStone15" parent="TombStone7" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 7.02199)
+
+[node name="TombStone8" parent="." instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.8973, 0.349678, -35.5205)
+
+[node name="TombStone2" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 0)
+
+[node name="TombStone3" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 0)
+
+[node name="TombStone4" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 0)
+
+[node name="TombStone5" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 0)
+
+[node name="TombStone6" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.1965)
+
+[node name="TombStone7" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 3.1965)
+
+[node name="TombStone8" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 3.1965)
+
+[node name="TombStone9" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 3.1965)
+
+[node name="TombStone10" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 3.1965)
+
+[node name="TombStone11" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.02199)
+
+[node name="TombStone12" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 7.02199)
+
+[node name="TombStone13" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7602, 0, 7.02199)
+
+[node name="TombStone14" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 7.02199)
+
+[node name="TombStone15" parent="TombStone8" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 7.02199)
+
+[node name="TombStone9" parent="." instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.996187, 0, -0.0872427, 0, 1, 0, 0.0872427, 0, 0.996187, -30.6539, 0.349678, 22.7603)
+
+[node name="TombStone2" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44577, 0, 0)
+
+[node name="TombStone3" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62284, 0, -1.56842)
+
+[node name="TombStone4" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 0)
+
+[node name="TombStone5" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 0)
+
+[node name="TombStone8" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48874, 0, 3.30785)
+
+[node name="TombStone9" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 3.1965)
+
+[node name="TombStone10" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 3.1965)
+
+[node name="TombStone11" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.943951, 0, 0.330086, 0, 1, 0, -0.330086, 0, 0.943951, 0.0405197, 0, 7.2606)
+
+[node name="TombStone12" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(0.943951, 0, 0.330086, 0, 1, 0, -0.330086, 0, 0.943951, 1.40525, 0, 6.78337)
+
+[node name="TombStone13" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.84303, -0.00782776, 7.96777)
+
+[node name="TombStone14" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.19175, 0, 7.02199)
+
+[node name="TombStone15" parent="TombStone9" instance=ExtResource("14_vrc4q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6777, 0, 7.02199)
 
 [connection signal="timeout" from="EnemyCountTimer" to="." method="_on_enemy_count_timer_timeout"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
