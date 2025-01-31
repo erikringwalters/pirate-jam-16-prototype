@@ -8,11 +8,11 @@
 [ext_resource type="Script" uid="uid://dhjhidvuhk8dv" path="res://scripts/spawner.gd" id="6_ivku7"]
 [ext_resource type="PackedScene" uid="uid://bcay80aaxis1" path="res://scenes/boundaries/boundary.tscn" id="7_pe1ox"]
 [ext_resource type="PackedScene" uid="uid://dnab25acrgyoy" path="res://scenes/weapons/dagger.tscn" id="9_0fkkc"]
-[ext_resource type="Texture2D" uid="uid://djdkut54stvqp" path="res://assets/Grass001_1K-JPG_Color.jpg" id="9_tf2q7"]
-[ext_resource type="Texture2D" uid="uid://dm8ynytv0nlf0" path="res://assets/Grass001_1K-JPG_AmbientOcclusion.jpg" id="10_b7m21"]
-[ext_resource type="Texture2D" uid="uid://cwh1ea7c3ee1b" path="res://assets/Grass001_1K-JPG_NormalGL.jpg" id="10_pe1ox"]
+[ext_resource type="Texture2D" uid="uid://djdkut54stvqp" path="res://assets/sound/environment/Grass001_1K-JPG_Color.jpg" id="9_tf2q7"]
+[ext_resource type="Texture2D" uid="uid://dm8ynytv0nlf0" path="res://assets/sound/environment/Grass001_1K-JPG_AmbientOcclusion.jpg" id="10_b7m21"]
+[ext_resource type="Texture2D" uid="uid://cwh1ea7c3ee1b" path="res://assets/sound/environment/Grass001_1K-JPG_NormalGL.jpg" id="10_pe1ox"]
 [ext_resource type="PackedScene" uid="uid://5kecjmlmmahs" path="res://assets/environment/fence.glb" id="13_b7m21"]
-[ext_resource type="PackedScene" uid="uid://c3r34lobnlnxv" path="res://assets/TombStone.fbx" id="14_vrc4q"]
+[ext_resource type="PackedScene" uid="uid://c3r34lobnlnxv" path="res://assets/sound/environment/TombStone.fbx" id="14_vrc4q"]
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bo4r5t2hvavcu"]
+[gd_scene load_steps=6 format=3 uid="uid://bo4r5t2hvavcu"]
 
 [ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_0frcf"]
 [ext_resource type="PackedScene" uid="uid://cyowyrjvxowkj" path="res://assets/weapons/Shotgun.fbx" id="1_o616w"]
+[ext_resource type="AudioStream" uid="uid://c3p7ja5gh1f64" path="res://assets/sound/fx/Shotgun.mp3" id="3_278ir"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0frcf"]
 radius = 0.11
@@ -37,3 +38,7 @@ shape = SubResource("CapsuleShape3D_278ir")
 
 [node name="Anchor" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.2, -1, 4.37114e-08)
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_278ir")
+volume_db = -27.0

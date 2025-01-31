@@ -107,6 +107,7 @@ func heal(amount):
 
 func player_process_explosion_damage(damage):
 	GameState.player_health -= damage/3
+	get_node('HurtSound').play()
 	health_changed.emit(false)
 	print("player splosion")
 	if GameState.player_health <= 0:
@@ -114,6 +115,8 @@ func player_process_explosion_damage(damage):
 
 func player_process_melee_damage(dmg):
 	GameState.player_health -= dmg
+	get_node('StabSound').play()
+	get_node('HurtSound').play()
 	health_changed.emit(false)
 	print("player health: ", GameState.player_health)
 	if GameState.player_health <= 0:
@@ -132,7 +135,9 @@ func handle_projectile_despawn(area:Node3D):
 func take_hit(area:Node3D):
 	if area.is_in_group("Projectile"):
 		if (!area.fired_by_player):
-			GameState.player_health -= area.projectile_damage() if area.has_method("projectile_damage") else 0
+			if area.has_method("projectile_damage"):
+				GameState.player_health -= area.projectile_damage() 
+				get_node('HurtSound').play()
 			health_changed.emit(false)
 			handle_projectile_despawn(area)
 			print("player health: ", GameState.player_health)
