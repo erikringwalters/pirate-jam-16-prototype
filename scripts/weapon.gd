@@ -13,6 +13,9 @@ extends RigidBody3D
 
 @onready var is_pickedup = false
 @onready var hit_box = $"RBCollision/HitBox"
+@onready var fire_timer = %FireTimer
+@onready var fire_wait_timer = %FireWaitTimer
+
 var _raycast:RayCast3D
 
 # Conditional projectile weapon variables, will remain null if not projectile
@@ -33,6 +36,8 @@ func _ready() -> void:
 		gun_barrel = _raycast
 	else:
 		damage = Items.weapons[weapon_type]['base_damage']
+	fire_timer.connect("timeout", Callable(self,"auto_shoot"))
+	fire_wait_timer.connect("timeout", Callable(self,"start_shot_fire_timer"))
 
 func add_child_logic(_projectile) -> void:
 	# Currently, when an enemy spawns with a projectile weapon, the `get_parent()` returns
@@ -78,29 +83,33 @@ func shoot() -> void:
 		projectile.add_to_group("Projectile")
 		add_child_logic(projectile)
 
-func start_shot_timer() -> void:
+func wait_to_fire() -> void:
+	fire_wait_timer.wait_time = randf_range(0, Items.weapons[weapon_type]['base_cooldown'])
+	fire_wait_timer.one_shot = true
+	#add_child(fire_wait_timer)
+	fire_wait_timer.start()
+	
+func start_shot_fire_timer() -> void:
 	if(weapon_type):
-		var timer = Timer.new()
-		timer.wait_time = Items.weapons[weapon_type]['base_cooldown']
-		#timer.time_left = randf_range(0.0, timer.wait_time) # Randomize time on start?
-		add_child(timer)
-		timer.start()
-		timer.connect("timeout", Callable(self,"auto_shoot"))
+		fire_timer.wait_time = Items.weapons[weapon_type]['base_cooldown']
+		#fire_timer.time_left = randf_range(0.0, fire_timer.wait_time) # Randomize time on start?
+		#add_child(fire_timer)
+		fire_timer.start()
 
 func enemy_pick_up() -> void:
 	print('enemy pickup')
 	is_pickedup = true
 	set_collision_layers(true, false)
-	start_shot_timer()
+	wait_to_fire()
 	
 func pick_up() -> void:
 	print('player pickup')
 	is_pickedup = true
 	set_collision_layers(false, true)
 	held_by_player = true
-	start_shot_timer()
+	start_shot_fire_timer()
 
-# DM Note: Timer triggered auto_shoot function with console logs for each weapon type
+# DM Note: fire_timer triggered auto_shoot function with console logs for each weapon type
 func auto_shoot() -> void:
 	if is_pickedup && is_projectile_weapon:
 		shoot()

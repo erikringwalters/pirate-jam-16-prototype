@@ -41,3 +41,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.
 [node name="ShotSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_2hjgi")
 volume_db = -27.0
+
+[node name="FireTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="FireWaitTimer" type="Timer" parent="."]
+unique_name_in_owner = true
