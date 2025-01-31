@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cwh1ea7c3ee1b" path="res://assets/sound/environment/Grass001_1K-JPG_NormalGL.jpg" id="10_pe1ox"]
 [ext_resource type="PackedScene" uid="uid://5kecjmlmmahs" path="res://assets/environment/fence.glb" id="13_b7m21"]
 [ext_resource type="PackedScene" uid="uid://6pa5mdf301q4" path="res://scenes/birb/birb_handler.tscn" id="14_pm6rs"]
-[ext_resource type="PackedScene" uid="uid://c3r34lobnlnxv" path="res://assets/TombStone.fbx" id="14_vrc4q"]
+[ext_resource type="PackedScene" uid="uid://c3r34lobnlnxv" path="res://assets/sound/environment/TombStone.fbx" id="14_vrc4q"]
 
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 1

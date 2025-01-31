@@ -92,11 +92,11 @@ skeleton = NodePath("../..")
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_lvxji")
-volume_db = -15.0
+volume_db = -25.0
 
 [node name="StabSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_p47bc")
-volume_db = -15.0
+volume_db = -25.0
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_pickup_area_entered"]
