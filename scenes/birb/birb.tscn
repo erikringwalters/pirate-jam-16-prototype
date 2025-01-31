@@ -12,6 +12,7 @@ script = ExtResource("2_tkrob")
 
 [node name="Body" parent="." index="0"]
 material_override = ExtResource("2_k038i")
+cast_shadow = 0
 
 [node name="wingL_flat" parent="." index="1" instance=ExtResource("3_j8tfs")]
 unique_name_in_owner = true

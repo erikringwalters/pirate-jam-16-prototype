@@ -4,6 +4,7 @@ signal wave_finished
 
 @export var enemy_scene : PackedScene
 @export var weapon_scene : PackedScene
+@export var birb_handler_scene:PackedScene
 
 @export var dist_from_center : float = 20.0
 @export var y_offset : float = 1.0
@@ -31,6 +32,14 @@ func _ready() -> void:
 	enemy_count_timer.wait_time = 0.1
 	spawn_wave(wave_n[get_safe_wave_count()])
 	connect("wave_finished", Callable(ui, "_on_wave_finished"))
+	spawn_birbs(250)
+
+func spawn_birbs(amount:int) -> void:
+	for i in amount:
+		var birb_handler = birb_handler_scene.instantiate()
+		add_child(birb_handler)
+		birb_handler.global_transform.origin.y = randf_range(10, 50)
+		birb_handler.global_rotation_degrees.y = randf_range(0, 360)
 
 # n will be squared
 func spawn_wave(n:int) -> void:

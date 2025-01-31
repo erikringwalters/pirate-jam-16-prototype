@@ -7,3 +7,4 @@
 
 [node name="Plane_001" parent="." index="0"]
 material_override = ExtResource("2_m8kq5")
+cast_shadow = 0

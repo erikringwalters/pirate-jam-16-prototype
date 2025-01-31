@@ -7,3 +7,4 @@
 
 [node name="Tail" parent="." index="0"]
 material_override = ExtResource("2_ig3rk")
+cast_shadow = 0

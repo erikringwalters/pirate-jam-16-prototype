@@ -5,7 +5,7 @@ extends Node3D
 @onready var tail = %tail
 
 var time := 0.0
-var flap_speed := 5.0
+var flap_speed := 10.0
 var flap_offset := 0.25
 var tail_amp := 0.2
 

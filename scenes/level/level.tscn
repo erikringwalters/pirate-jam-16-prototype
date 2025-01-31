@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dm8ynytv0nlf0" path="res://assets/Grass001_1K-JPG_AmbientOcclusion.jpg" id="10_b7m21"]
 [ext_resource type="Texture2D" uid="uid://cwh1ea7c3ee1b" path="res://assets/Grass001_1K-JPG_NormalGL.jpg" id="10_pe1ox"]
 [ext_resource type="PackedScene" uid="uid://5kecjmlmmahs" path="res://assets/environment/fence.glb" id="13_b7m21"]
-[ext_resource type="PackedScene" uid="uid://406108lh7eh8" path="res://scenes/birb/birb.tscn" id="14_pm6rs"]
+[ext_resource type="PackedScene" uid="uid://6pa5mdf301q4" path="res://scenes/birb/birb_handler.tscn" id="14_pm6rs"]
 [ext_resource type="PackedScene" uid="uid://c3r34lobnlnxv" path="res://assets/TombStone.fbx" id="14_vrc4q"]
 
 [sub_resource type="Environment" id="Environment_h2yge"]
@@ -50,6 +50,7 @@ size = Vector3(85, 1, 85)
 script = ExtResource("1_m0bv2")
 enemy_scene = ExtResource("2_b7m21")
 weapon_scene = ExtResource("3_pm6rs")
+birb_handler_scene = ExtResource("14_pm6rs")
 
 [node name="UI" parent="." instance=ExtResource("4_vrc4q")]
 
@@ -596,9 +597,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -25, 0
 
 [node name="fence5" parent="fences4" instance=ExtResource("13_b7m21")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -35, 0.8, 40)
-
-[node name="Birb" parent="." instance=ExtResource("14_pm6rs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.440288, 0.298132, 5.25839)
 
 [connection signal="timeout" from="EnemyCountTimer" to="." method="_on_enemy_count_timer_timeout"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
