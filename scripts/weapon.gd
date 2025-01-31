@@ -49,6 +49,7 @@ func add_child_logic(_projectile) -> void:
 		get_parent().get_parent().add_child(_projectile)
 		
 func shoot() -> void:
+	get_node('ShotSound').play()
 	if (scatter_shot):
 		# Spawn ten bullets
 		for i in range(10):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://hjn3ta46v6nr"]
+[gd_scene load_steps=6 format=3 uid="uid://hjn3ta46v6nr"]
 
 [ext_resource type="PackedScene" uid="uid://bmxot2bs7v0bt" path="res://assets/weapons/Rocket.fbx" id="1_6gyb8"]
 [ext_resource type="Script" uid="uid://dpsy00loetsif" path="res://scripts/weapon.gd" id="1_kjqmh"]
+[ext_resource type="AudioStream" uid="uid://cf3h82btjyr5n" path="res://assets/sound/fx/Rocket.mp3" id="3_2hjgi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kjqmh"]
 radius = 0.15
@@ -36,6 +37,10 @@ shape = SubResource("CapsuleShape3D_2hjgi")
 
 [node name="Anchor" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.2, 5.24537e-08)
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2hjgi")
+volume_db = -27.0
 
 [node name="FireTimer" type="Timer" parent="."]
 unique_name_in_owner = true

@@ -70,6 +70,7 @@ func _on_reset_hit_color_timeout() -> void:
 
 func enemy_process_melee_damage(dmg) -> void:
 	print('melee damage')
+	$StabSound.play()
 	process_damage(dmg)
 
 func enemy_process_explosion_damage(dmg):

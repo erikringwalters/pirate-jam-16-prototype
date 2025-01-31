@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c3r34lobnlnxv"
-path="res://.godot/imported/TombStone.fbx-a3b952041813a578a9e82423697418e3.scn"
+path="res://.godot/imported/TombStone.fbx-1f16133af682d95289a886f52cf7e7ff.scn"
 
 [deps]
 
-source_file="res://assets/TombStone.fbx"
-dest_files=["res://.godot/imported/TombStone.fbx-a3b952041813a578a9e82423697418e3.scn"]
+source_file="res://assets/sound/environment/TombStone.fbx"
+dest_files=["res://.godot/imported/TombStone.fbx-1f16133af682d95289a886f52cf7e7ff.scn"]
 
 [params]
 

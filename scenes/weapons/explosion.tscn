@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhlbubobgko7c"]
+[gd_scene load_steps=6 format=3 uid="uid://dhlbubobgko7c"]
 
 [ext_resource type="Script" uid="uid://b5dlccxh4nuh8" path="res://scripts/explosion.gd" id="1_nmdyk"]
+[ext_resource type="AudioStream" uid="uid://bnhowwwhufwmf" path="res://assets/sound/fx/Explosion.mp3" id="2_llixc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_llixc"]
 radius = 2.847
@@ -28,6 +29,10 @@ mesh = SubResource("SphereMesh_4u5ba")
 
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_llixc")
+volume_db = -15.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

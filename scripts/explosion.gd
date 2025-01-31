@@ -32,6 +32,7 @@ func _on_body_exited(body: Node3D) -> void:
 		items_in_radius.erase(body)
 
 func explosion():
+	get_node('ExplosionSound').play()
 	var force_dir : Vector3
 	#var random_vector : Vector3
 	#Applying the explosion force for every Rigidbody in the array.

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqtfijlj7vwni"]
+[gd_scene load_steps=9 format=3 uid="uid://cqtfijlj7vwni"]
 
 [ext_resource type="Script" uid="uid://1a81wjttwnhm" path="res://scripts/enemy.gd" id="1_4a83h"]
 [ext_resource type="PhysicsMaterial" uid="uid://dhkqttv3uynke" path="res://materials/enemy_physics.tres" id="1_tjssy"]
 [ext_resource type="Texture2D" uid="uid://bnhh6vf5r24ld" path="res://assets/enemy/GhostTex.png" id="2_40wdo"]
 [ext_resource type="ArrayMesh" uid="uid://gferg0ys3cxv" path="res://assets/enemy/Ghost.obj" id="3_tjssy"]
+[ext_resource type="AudioStream" uid="uid://bg44l4c0edmu1" path="res://assets/sound/fx/Stab.mp3" id="5_gl05p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_883im"]
 
@@ -54,6 +55,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.132809, -0.5)
 
 [node name="ResetHitColor" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="StabSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_gl05p")
+volume_db = -15.0
 
 [connection signal="area_entered" from="RBCollision/HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="timeout" from="ResetHitColor" to="." method="_on_reset_hit_color_timeout"]

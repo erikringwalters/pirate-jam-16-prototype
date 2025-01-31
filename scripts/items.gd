@@ -30,6 +30,7 @@ var common_base_cooldown := 1.5
 		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
+		"sound": load("res://assets/sound/fx/Pistol.mp3"),
 	}, 
 	"Shotgun" : {
 		"path":"res://assets/weapons/Shotgun.fbx",
@@ -39,6 +40,7 @@ var common_base_cooldown := 1.5
 		"base_cooldown": common_base_cooldown,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
+		"sound": load("res://assets/sound/fx/Shotgun.mp3"),
 	}, 
 	"Rocket" : {
 		"path":"res://assets/weapons/Rocket.fbx",
@@ -48,6 +50,7 @@ var common_base_cooldown := 1.5
 		"base_cooldown": 2.0,
 		"cooldown_mult": 1.0,
 		"model_rotation": 1,
+		"sound": load("res://assets/sound/fx/Rocket.mp3"),
 	}
 }
 
