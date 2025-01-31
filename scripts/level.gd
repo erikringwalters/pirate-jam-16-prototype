@@ -5,7 +5,7 @@ signal wave_finished
 @export var enemy_scene : PackedScene
 @export var weapon_scene : PackedScene
 
-@export var dist_from_center : float = 15.0
+@export var dist_from_center : float = 20.0
 @export var y_offset : float = 1.0
 @export var spread_offset : float = 5
 @export var wave_n := [1,2,2,3,3,4,5]
@@ -13,6 +13,14 @@ signal wave_finished
 
 var enemies_remaining = 0
 var max_known_wave_count = wave_n.size() - 1
+
+var wave_positions := [
+	Vector2(dist_from_center, dist_from_center), 
+	Vector2(dist_from_center, -dist_from_center),
+	Vector2(-dist_from_center, dist_from_center), 
+	Vector2(-dist_from_center, -dist_from_center), 
+]
+var current_wave_position := Vector2(-dist_from_center, dist_from_center);
 
 @onready var player = %Player
 @onready var enemy_count_timer = %EnemyCountTimer
@@ -26,8 +34,16 @@ func _ready() -> void:
 
 # n will be squared
 func spawn_wave(n:int) -> void:
-	var x_offset = dist_from_center if GameState.current_wave % 2 == 1 else -dist_from_center
-	var z_offset = dist_from_center if GameState.current_wave % 2 == 0 else -dist_from_center
+	var possible_wave_positions = wave_positions.duplicate(false)
+	if GameState.current_wave != 0:
+		# Randomize position
+		possible_wave_positions.erase(current_wave_position)
+		current_wave_position = possible_wave_positions[randi_range(0, possible_wave_positions.size() -1)]
+	
+	var x_offset = current_wave_position.x
+	var z_offset = current_wave_position.y
+	var total_wave_size = spread_offset*n
+
 	for i in n:
 		for j in n:
 			# Spawn enemy
@@ -35,9 +51,9 @@ func spawn_wave(n:int) -> void:
 			add_child(enemy)
 			enemies_remaining += 1
 			enemy.global_transform.origin = Vector3(
-				i * spread_offset + x_offset,
-				y_offset, 
-				j * spread_offset + z_offset
+				i * spread_offset + x_offset - total_wave_size/2,
+				y_offset,
+				j * spread_offset + z_offset - total_wave_size/2
 			)
 
 func _on_enemy_died():
