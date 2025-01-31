@@ -55,4 +55,10 @@ script = ExtResource("3_n5jhk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63349e-08, 7.14023e-16, 0.3737)
 shape = SubResource("BoxShape3D_j34lm")
 
+[node name="FireTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="FireWaitTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
 [connection signal="body_entered" from="MeleePlayerArea" to="MeleePlayerArea" method="_on_body_entered"]

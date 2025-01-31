@@ -54,5 +54,11 @@ script = ExtResource("3_58ehi")
 transform = Transform3D(1, 0, 1.57356e-28, 0, 1, 0, 0, 0, 1, -1.86989e-21, 0.940995, -4.11322e-08)
 shape = SubResource("BoxShape3D_gwb47")
 
+[node name="FireTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="FireWaitTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
 [connection signal="body_entered" from="RBCollision/HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_entered" from="MeleePlayerArea" to="MeleePlayerArea" method="_on_body_entered"]
