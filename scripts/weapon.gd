@@ -22,7 +22,6 @@ var _raycast:RayCast3D
 var gun_barrel
 var projectile_scene
 var projectile
-
 var held_by_player = false
 
 func _ready() -> void:
